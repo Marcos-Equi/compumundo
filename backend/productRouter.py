@@ -12,7 +12,7 @@ def get_products():
 
 @productos.route('/<int:id>', methods=['GET'])
 def get_productById(id):
-    producto = Producto.query.get(id)
+    producto = Producto.buscar_por_id(id)
     if not producto:
         return jsonify({'error': 'Producto no encontrado'}), 404
 

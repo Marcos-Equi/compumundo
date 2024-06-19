@@ -37,4 +37,8 @@ class Producto(db.Model):
         tipo = tipo.lower()
         resultados = Producto.query.filter(func.lower(Producto.tipo) == tipo).all()
         return resultados
+    
+    @staticmethod
+    def buscar_por_id(id):
+        return Producto.query.get(id)
 
