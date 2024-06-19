@@ -21,11 +21,13 @@ def get_productById(id):
 @productos.route('/tipo/<string:tipo>', methods=['GET'])
 def get_productByTipo(tipo):
     tipo = tipo.lower()
-    productos = Producto.query.filter(func.lower(Producto.tipo) == tipo).all()
+    productos = Producto.buscar_por_tipo(tipo)
     if not productos:
         return jsonify({'error': 'Producto no encontrado'}), 404
 
-    return jsonify({'productos': [producto.serialize() for producto in productos]}), 200
+    resultados = [producto.serialize() for producto in productos]
+
+    return jsonify({'productos': resultados}), 200
 
 @productos.route('/nombre/<string:nombre>', methods=['GET'])
 def get_productsByQuery(nombre):

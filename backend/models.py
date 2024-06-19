@@ -31,4 +31,10 @@ class Producto(db.Model):
             func.replace(func.lower(Producto.nombre), ' ', '').like(f'%{nombre}%')
         ).all()
         return resultados
+    
+    @staticmethod
+    def buscar_por_tipo(tipo):
+        tipo = tipo.lower()
+        resultados = Producto.query.filter(func.lower(Producto.tipo) == tipo).all()
+        return resultados
 
