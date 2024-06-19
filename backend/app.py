@@ -1,20 +1,22 @@
 from flask import Flask
 from flask_cors import CORS
+from models import db
+from config import Config
 from productRouter import productos
 from carritoRouter import carritos
-from models import db
 
 app = Flask(__name__)
+app.config.from_object(Config)
+port = 5000
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost/compumundo'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
-
 
 app.register_blueprint(productos)
 app.register_blueprint(carritos)
 
 if __name__ == '__main__':
+    print('Starting server...')
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True, port=port)
+    print('Started...')
