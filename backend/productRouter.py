@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from models import Producto, db
+from sqlalchemy import func
 
 productos = Blueprint('productos', __name__, url_prefix='/productos')
 
@@ -16,6 +17,25 @@ def get_productById(id):
         return jsonify({'error': 'Producto no encontrado'}), 404
 
     return jsonify({'producto': producto.serialize()}), 200
+
+@productos.route('/tipo/<string:tipo>', methods=['GET'])
+def get_productByTipo(tipo):
+    tipo = tipo.lower()
+    productos = Producto.query.filter(func.lower(Producto.tipo) == tipo).all()
+    if not productos:
+        return jsonify({'error': 'Producto no encontrado'}), 404
+
+    return jsonify({'productos': [producto.serialize() for producto in productos]}), 200
+
+@productos.route('/nombre/<string:nombre>', methods=['GET'])
+def get_productsByQuery(nombre):
+    productos = Producto.buscar_por_nombre(nombre)
+    if not productos:
+        return jsonify({'error': 'Producto no encontrado'}), 404
+    
+    resultados = [producto.serialize() for producto in productos]
+
+    return jsonify({'productos': resultados}), 200
 
 @productos.route('/', methods=['POST'])
 def post_products():

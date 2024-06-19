@@ -1,5 +1,6 @@
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 
 db = SQLAlchemy()
 
@@ -22,4 +23,12 @@ class Producto(db.Model):
             'stock': self.stock,
             'descripcion': self.descripcion
         }
+    
+    @staticmethod
+    def buscar_por_nombre(nombre):
+        nombre = nombre.lower().replace(' ', '')
+        resultados = Producto.query.filter(
+            func.replace(func.lower(Producto.nombre), ' ', '').like(f'%{nombre}%')
+        ).all()
+        return resultados
 
