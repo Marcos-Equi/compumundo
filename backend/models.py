@@ -13,4 +13,13 @@ class Producto(db.Model):
     stock = db.Column(db.Integer, nullable=False)
     descripcion = db.Column(db.Text)
     
+    def serialize(self):
+        return {
+            'id': self.id,
+            'nombre': self.nombre,
+            'tipo': self.tipo,
+            'precio': str(self.precio),
+            'stock': self.stock,
+            'descripcion': self.descripcion
+        }
 
