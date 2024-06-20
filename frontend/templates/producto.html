@@ -24,7 +24,7 @@
                     if (data.error) {
                         document.body.innerHTML = `<p>${data.error}</p>`;
                     } else {
-                        var product = data.productos[0]; // Assuming only one product with that name
+                        var product = data.productos[0]; 
                         document.getElementById('product-name').innerText = product.nombre;
                         document.getElementById('product-type').innerText = `Tipo: ${product.tipo}`;
                         document.getElementById('product-price').innerText = `Precio: ${product.precio}`;
