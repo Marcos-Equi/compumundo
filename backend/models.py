@@ -1,4 +1,4 @@
-
+import datetime
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 
@@ -42,3 +42,14 @@ class Producto(db.Model):
     def buscar_por_id(id):
         return Producto.query.get(id)
 
+class Carrito(db.Model):
+    __tablename__ = 'carritos'
+    id = db.Column(db.Integer, primary_key=True)
+    nombre_usuario = db.Column(db.String(20), nullable=False)
+    fecha_creacion = db.Column(db.DateTime, default=datetime.datetime.now())
+
+class ProdCarrito(db.Model):
+    __tablename__ = 'carrito_prod'
+    carrito_id = db.Column(db.Integer, db.ForeignKey('carritos.id'), primary_key=True)
+    producto_id = db.Column(db.Integer, db.ForeignKey('productos.id'), primary_key=True)
+    cantidad = db.Column(db.Integer, nullable=False)
