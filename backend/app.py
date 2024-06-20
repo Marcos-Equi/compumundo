@@ -15,6 +15,11 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
+@app.route('/producto/<nombre>')
+def producto(nombre):
+    return render_template('producto.html')
+
+
 
 app.register_blueprint(productos)
 app.register_blueprint(carritos)
