@@ -16,8 +16,8 @@ def index():
     return render_template('index.html')
 
 @app.route('/producto/<nombre>')
-def producto(nombre):
-    return render_template('producto.html')
+def product(nombre):
+    return render_template('product.html')
 
 
 
