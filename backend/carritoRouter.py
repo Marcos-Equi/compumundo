@@ -8,18 +8,7 @@ def get_cart(id):
     carrito = Carrito.buscar_por_id(id)
     if not carrito:
         return jsonify({'error': 'Carrito no existente'}), 404
-    items_carrito = ProdCarrito.buscar_por_carrito(id)
-    lista_items = []
-    for item in items_carrito:
-        producto = Producto.buscar_por_id(item.producto_id)
-        info_producto = {
-            'nombre': producto.nombre,
-            'tipo': producto.tipo,
-            'precio': producto.precio,
-            'descripcion': producto.descripcion
-        }
-        lista_items.append(item.serialize(info_producto))
-    return jsonify({'carrito': carrito.serialize(lista_items)}), 200
+    return jsonify({'carrito': carrito.serialize()}), 200
 
 @carritos.route('/', methods=['POST'])
 def create_cart():
@@ -32,3 +21,22 @@ def create_cart():
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
     return jsonify({'carrito': carrito.serialize([])}), 201
+
+@carritos.route('/<int:id>/producto/<int:id_producto>', methods=['POST'])
+def add_item(id, id_producto):
+    try:
+        item_carrito = ProdCarrito.buscar_por_id(id, id_producto)
+        if not item_carrito:
+            item_carrito = ProdCarrito(
+                carrito_id=id,
+                producto_id=id_producto,
+                cantidad=1
+            )
+            db.session.add(item_carrito)
+        else:
+            item_carrito.cantidad += 1
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+    return jsonify({'item': item_carrito.serialize()}), 201
