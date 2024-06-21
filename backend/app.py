@@ -19,8 +19,6 @@ def index():
 def product(nombre):
     return render_template('product.html')
 
-
-
 app.register_blueprint(productos)
 app.register_blueprint(carritos)
 

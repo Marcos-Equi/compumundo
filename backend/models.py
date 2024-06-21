@@ -1,4 +1,3 @@
-
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 
@@ -13,7 +12,8 @@ class Producto(db.Model):
     precio = db.Column(db.Numeric(10, 2), nullable=False)
     stock = db.Column(db.Integer, nullable=False)
     descripcion = db.Column(db.Text)
-    
+    imagen = db.Column(db.String(255))  
+
     def serialize(self):
         return {
             'id': self.id,
@@ -21,7 +21,8 @@ class Producto(db.Model):
             'tipo': self.tipo,
             'precio': str(self.precio),
             'stock': self.stock,
-            'descripcion': self.descripcion
+            'descripcion': self.descripcion,
+            'imagen': self.imagen
         }
     
     @staticmethod
@@ -41,4 +42,3 @@ class Producto(db.Model):
     @staticmethod
     def buscar_por_id(id):
         return Producto.query.get(id)
-
