@@ -41,6 +41,20 @@ def add_item(id, id_producto):
         return jsonify({'error': str(e)}), 500
     return jsonify({'item': item_carrito.serialize()}), 201
 
+@carritos.route('/<int:id>/producto/<int:id_producto>', methods=['PATCH'])
+def update_item(id, id_producto):
+    data = request.get_json()
+    item_carrito = ProdCarrito.buscar_por_id(id, id_producto)
+    if not item_carrito:
+        return jsonify({'error': 'Item no encontrado'}), 404
+    item_carrito.cantidad = data['cantidad']
+    try:
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+    return jsonify({'item': item_carrito.serialize()}), 201
+
 @carritos.route('/<int:id>/producto/<int:id_producto>', methods=['DELETE'])
 def remove_item(id, id_producto):
     item_carrito = ProdCarrito.buscar_por_id(id, id_producto)
