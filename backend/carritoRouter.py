@@ -22,6 +22,15 @@ def create_cart():
         return jsonify({'error': str(e)}), 500
     return jsonify({'carrito': carrito.serialize([])}), 201
 
+@carritos.route('/<int:id>', methods=['DELETE'])
+def delete_cart(id):
+    carrito = Carrito.buscar_por_id(id)
+    if not carrito:
+        return jsonify({'error': 'Carrito no existente'}), 404
+    db.session.delete(carrito)
+    db.session.commit()
+    return jsonify({'exito': True}), 200
+
 @carritos.route('/<int:id>/producto/<int:id_producto>', methods=['POST'])
 def add_item(id, id_producto):
     try:
