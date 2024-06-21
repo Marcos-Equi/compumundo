@@ -48,7 +48,9 @@ class Carrito(db.Model):
     nombre_usuario = db.Column(db.String(20), nullable=False)
     fecha_creacion = db.Column(db.DateTime, default=datetime.datetime.now())
 
-    def serialize(self, lista_items):
+    def serialize(self):
+        items_carrito = ProdCarrito.buscar_por_carrito(self.id)
+        lista_items = [item.serialize() for item in items_carrito]
         return {
             'id': self.id,
             'items': lista_items,
@@ -66,13 +68,24 @@ class ProdCarrito(db.Model):
     producto_id = db.Column(db.Integer, db.ForeignKey('productos.id'), primary_key=True)
     cantidad = db.Column(db.Integer, nullable=False)
 
-    def serialize(self, dict_info):
+    def serialize(self):
+        producto = Producto.buscar_por_id(self.producto_id)
+        info_producto = {
+            'nombre': producto.nombre,
+            'tipo': producto.tipo,
+            'precio': producto.precio,
+            'descripcion': producto.descripcion
+        }
         return {
             'carrito_id': self.carrito_id,
             'producto_id': self.producto_id,
-            'info_producto': dict_info,
+            'info_producto': info_producto,
             'cantidad': self.cantidad
         }
+    
+    @staticmethod
+    def buscar_por_id(id_carrito, id_producto):
+        return ProdCarrito.query.get((id_carrito, id_producto))
     
     @staticmethod
     def buscar_por_carrito(id):
