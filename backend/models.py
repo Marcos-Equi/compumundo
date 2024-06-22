@@ -42,3 +42,8 @@ class Producto(db.Model):
     @staticmethod
     def buscar_por_id(id):
         return Producto.query.get(id)
+
+    @staticmethod
+    def producto_mas_barato_por_tipo(tipo):
+        producto_mas_barato = Producto.query.filter_by(tipo=tipo).order_by(Producto.precio).first()
+        return producto_mas_barato
