@@ -113,3 +113,16 @@ def delete_product(id):
     db.session.commit()
 
     return jsonify({'Producto eliminado': producto.serialize()}), 200
+
+
+@productos.route('/destacados', methods=['GET'])
+def obtener_productos_destacados():
+    tipos_de_productos = ['tarjeta grafica', 'monitor', 'teclado', 'procesador', 'mouse']
+    productos_destacados = []
+
+    for tipo in tipos_de_productos:
+        producto_mas_barato = Producto.producto_mas_barato_por_tipo(tipo)
+        if producto_mas_barato:
+            productos_destacados.append(producto_mas_barato.serialize())
+
+    return jsonify({'productos': productos_destacados}), 200
