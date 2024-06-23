@@ -8,15 +8,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <div class="search-container">
-        <h1>Buscar Productos</h1>
-        <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Buscar productos...">
-            <button id="search-button"><i class="fas fa-search"></i></button>
+    <div class="container">
+        <div class="search-container">
+            <h1>Buscar Productos</h1>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar productos...">
+                <button id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        <div id="results-container"></div>
+        <div class="featured-products">
+            <h2>Productos Destacados</h2>
+            <div class="featured-products-row" id="featured-products-container"></div>
         </div>
     </div>
-    <div id="results-container"></div>
-
     <script src="/static/js/search.js"></script>
 </body>
 </html>
