@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
             data.productos.forEach(producto => {
                 var productDiv = document.createElement('div');
                 productDiv.classList.add('featured-product');
+                productDiv.addEventListener('click', function() {
+                    window.location.href = `/producto/${encodeURIComponent(producto.nombre)}`;
+                });
 
                 var productImage = document.createElement('img');
                 productImage.src = producto.imagen;
