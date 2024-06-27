@@ -43,7 +43,7 @@ def get_productsByQuery(nombre):
 def post_products():
     data = request.get_json()
 
-    required_fields = ['nombre', 'tipo', 'precio', 'stock', 'descripcion']
+    required_fields = ['nombre', 'tipo', 'precio', 'stock', 'descripcion', 'imagen']
     for required_field in required_fields:
         if required_field not in data:
             return jsonify({'error': 'Faltan datos'}), 400
@@ -52,7 +52,8 @@ def post_products():
         not isinstance(data['tipo'], str) or \
         not isinstance(data['precio'], (int, float)) or data['precio'] <= 0 or \
         not isinstance(data['stock'], int) or \
-        not isinstance(data['descripcion'], str):
+        not isinstance(data['descripcion'], str) or \
+        not isinstance(data['imagen'], str):
         return jsonify({'error': 'Datos incorrectos'}), 400
     
 
@@ -64,7 +65,8 @@ def post_products():
         tipo=data['tipo'],
         precio=data['precio'],
         stock=data['stock'],
-        descripcion=data['descripcion']
+        descripcion=data['descripcion'],
+        imagen=data['imagen']
     )
 
     try:
@@ -113,7 +115,6 @@ def delete_product(id):
     db.session.commit()
 
     return jsonify({'Producto eliminado': producto.serialize()}), 200
-
 
 @productos.route('/destacados', methods=['GET'])
 def obtener_productos_destacados():
