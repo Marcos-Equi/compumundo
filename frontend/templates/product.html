@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Producto</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
+
 <body>
     <div class="product-container">
-        <h1 id="product-name"></h1>
-        <p id="product-type"></p>
-        <p id="product-price"></p>
-        <p id="product-description"></p>
-        <img id="product-image" alt="Imagen del producto">
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var productName = window.location.pathname.split('/').pop();
 
             fetch(`/productos/nombre/${productName}`)
@@ -24,13 +21,26 @@
                     if (data.error) {
                         document.body.innerHTML = `<p>${data.error}</p>`;
                     } else {
-                        var product = data.productos[0]; 
-                        document.getElementById('product-name').innerText = product.nombre;
-                        document.getElementById('product-type').innerText = `Tipo: ${product.tipo}`;
-                        document.getElementById('product-price').innerText = `Precio: ${product.precio}`;
-                        document.getElementById('product-description').innerText = `Descripción: ${product.descripcion}`;
-                        var imgElement = document.getElementById('product-image');
-                        imgElement.src = product.imagen;
+                        var products = data.productos
+                        let container = document.querySelector('.product-container');
+                        for (const prod of products) {
+                            let nombre = document.createElement('h1');
+                            let tipo = document.createElement('p');
+                            let precio = document.createElement('p');
+                            let descripcion = document.createElement('p');
+                            let imagen = document.createElement('img');
+                            nombre.innerText = prod.nombre;
+                            tipo.innerText = `Tipo: ${prod.tipo}`;
+                            precio.innerText = `Precio: ${prod.precio}`;
+                            descripcion.innerText = `Descripción: ${prod.descripcion}`;
+                            imagen.src = prod.imagen;
+                            console.log(prod);
+                            container.appendChild(nombre)
+                            container.appendChild(tipo)
+                            container.appendChild(precio)
+                            container.appendChild(descripcion)
+                            container.appendChild(imagen)
+                        }
                     }
                 })
                 .catch(error => {
@@ -39,4 +49,5 @@
         });
     </script>
 </body>
+
 </html>
