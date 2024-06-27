@@ -40,7 +40,7 @@ def get_productsByQuery(nombre):
     return jsonify({'productos': resultados}), 200
 
 @productos.route('/', methods=['POST'])
-def post_products():
+def post_product():
     data = request.get_json()
 
     required_fields = ['nombre', 'tipo', 'precio', 'stock', 'descripcion', 'imagen']
@@ -77,6 +77,47 @@ def post_products():
         return jsonify({'error': str(e)}), 500
 
     return jsonify({'producto': producto.serialize()}), 201
+
+@productos.route('/many', methods=['POST'])
+def post_products():
+    data = request.get_json()
+
+    required_fields = ['nombre', 'tipo', 'precio', 'stock', 'descripcion', 'imagen']
+    for product in data:
+        for required_field in required_fields:
+            if required_field not in product:
+                return jsonify({'error': 'Faltan datos'}), 400
+
+        if not isinstance(product['nombre'], str) or \
+            not isinstance(product['tipo'], str) or \
+            not isinstance(product['precio'], (int, float)) or product['precio'] <= 0 or \
+            not isinstance(product['stock'], int) or \
+            not isinstance(product['descripcion'], str) or \
+            not isinstance(product['imagen'], str):
+            return jsonify({'error': 'Datos incorrectos'}), 400
+        
+        if (Producto.query.filter_by(nombre=product['nombre']).first()):
+            return jsonify({'error': 'Ya existe un producto con ese nombre'}), 400
+    
+    productos = []
+    for product in data:
+        producto = Producto(
+            nombre=product['nombre'],
+            tipo=product['tipo'],
+            precio=product['precio'],
+            stock=product['stock'],
+            descripcion=product['descripcion'],
+            imagen=product['imagen']
+        )
+        productos.append(producto)
+    
+    try:
+        db.session.add_all(productos)
+        db.session.commit()
+        return jsonify({'productos': [producto.serialize() for producto in productos]}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 @productos.route('/<int:id>', methods=['PATCH'])
 def patch_product(id):
