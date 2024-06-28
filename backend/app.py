@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, Blueprint
 from flask_cors import CORS
 from models import db
 from config import Config
@@ -11,6 +11,10 @@ port = 5000
 CORS(app)
 db.init_app(app)
 
+api = Blueprint('api', __name__, url_prefix='/api')
+api.register_blueprint(productos)
+api.register_blueprint(carritos)
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -19,7 +23,7 @@ def index():
 def product():
     return render_template('products.html')
 
-app.register_blueprint(productos)
+app.register_blueprint(api)
 app.register_blueprint(carritos)
 
 if __name__ == '__main__':

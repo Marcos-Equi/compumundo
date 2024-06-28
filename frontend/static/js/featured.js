@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var featuredProductsContainer = document.getElementById('featured-products-container');
 
-    fetch('/productos/destacados')
+    fetch('/api/productos/destacados')
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             data.productos.forEach(producto => {
                 var productDiv = document.createElement('div');
                 productDiv.classList.add('featured-product');
-                productDiv.addEventListener('click', function() {
+                productDiv.addEventListener('click', function () {
                     window.location.href = `/producto/${encodeURIComponent(producto.nombre)}`;
                 });
 

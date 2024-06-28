@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let productName = params.get('nombre');
 
     if (!productName) {
-        fetch('/productos')
+        fetch('/api/productos')
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
     else {
-        fetch(`/productos/nombre/${productName}`)
+        fetch(`/api/productos/nombre/${productName}`)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
