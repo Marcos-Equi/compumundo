@@ -159,7 +159,7 @@ def delete_product(id):
 
 @productos.route('/destacados', methods=['GET'])
 def obtener_productos_destacados():
-    tipos_de_productos = ['tarjeta grafica', 'monitor', 'teclado', 'procesador', 'mouse']
+    tipos_de_productos = ['Placa de video', 'monitor', 'teclado', 'procesador', 'mouse']
     productos_destacados = []
 
     for tipo in tipos_de_productos:
