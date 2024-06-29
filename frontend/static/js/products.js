@@ -2,21 +2,26 @@
 function printProducts(products) {
     let container = document.querySelector('.product-container');
     for (const prod of products) {
-        let nombre = document.createElement('h1');
-        let tipo = document.createElement('p');
-        let precio = document.createElement('p');
-        let descripcion = document.createElement('p');
-        let imagen = document.createElement('img');
-        nombre.innerText = prod.nombre;
-        tipo.innerText = `Tipo: ${prod.tipo}`;
-        precio.innerText = `Precio: ${prod.precio}`;
-        descripcion.innerText = `Descripción: ${prod.descripcion}`;
-        imagen.src = prod.imagen;
-        container.appendChild(nombre)
-        container.appendChild(tipo)
-        container.appendChild(precio)
-        container.appendChild(descripcion)
-        container.appendChild(imagen)
+        const productCard = `
+            <div class="col-12 product-card">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src=${prod.imagen} class="img-fluid rounded-start card-img"
+                                alt=${prod.imagen}>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">${prod.nombre}</h5>
+                                <p class="card-text">${prod.descripcion}</p>
+                                <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+        container.innerHTML += productCard;
     }
 }
 

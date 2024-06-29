@@ -125,3 +125,24 @@ body {
 .featured-product:hover {
     transform: scale(1.05);
 }
+
+#sidebar-wrapper {
+    width: 250px;
+    position: fixed;
+    height: 100vh;
+}
+
+#content-wrapper {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+.product-card {
+    margin-bottom: 20px;
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
