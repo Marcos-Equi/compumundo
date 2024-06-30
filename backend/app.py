@@ -23,6 +23,12 @@ def index():
 def product():
     return render_template('products.html')
 
+
+@app.route('/iniciar_sesion')
+def iniciar_sesion():
+    return render_template('login.html')
+
+
 app.register_blueprint(api)
 app.register_blueprint(carritos)
 

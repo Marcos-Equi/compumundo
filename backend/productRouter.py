@@ -168,4 +168,3 @@ def obtener_productos_destacados():
             productos_destacados.append(producto_mas_barato.serialize())
 
     return jsonify({'productos': productos_destacados}), 200
-
