@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
+import datetime
 
 db = SQLAlchemy()
 
@@ -42,8 +43,57 @@ class Producto(db.Model):
     @staticmethod
     def buscar_por_id(id):
         return Producto.query.get(id)
-
+    
     @staticmethod
     def producto_mas_barato_por_tipo(tipo):
         producto_mas_barato = Producto.query.filter_by(tipo=tipo).order_by(Producto.precio).first()
         return producto_mas_barato
+
+class Carrito(db.Model):
+    __tablename__ = 'carritos'
+    id = db.Column(db.Integer, primary_key=True)
+    nombre_usuario = db.Column(db.String(20), nullable=False)
+    fecha_creacion = db.Column(db.DateTime, default=datetime.datetime.now())
+
+    def serialize(self):
+        items_carrito = ProdCarrito.buscar_por_carrito(self.id)
+        lista_items = [item.serialize() for item in items_carrito]
+        return {
+            'id': self.id,
+            'items': lista_items,
+            'nombre_usuario': self.nombre_usuario,
+            'fecha_creacion': self.fecha_creacion
+        }
+    
+    @staticmethod
+    def buscar_por_id(id):
+        return Carrito.query.get(id)
+
+class ProdCarrito(db.Model):
+    __tablename__ = 'carrito_prod'
+    carrito_id = db.Column(db.Integer, db.ForeignKey('carritos.id'), primary_key=True)
+    producto_id = db.Column(db.Integer, db.ForeignKey('productos.id'), primary_key=True)
+    cantidad = db.Column(db.Integer, nullable=False)
+
+    def serialize(self):
+        producto = Producto.buscar_por_id(self.producto_id)
+        info_producto = {
+            'nombre': producto.nombre,
+            'tipo': producto.tipo,
+            'precio': producto.precio,
+            'descripcion': producto.descripcion
+        }
+        return {
+            'carrito_id': self.carrito_id,
+            'producto_id': self.producto_id,
+            'info_producto': info_producto,
+            'cantidad': self.cantidad
+        }
+    
+    @staticmethod
+    def buscar_por_id(id_carrito, id_producto):
+        return ProdCarrito.query.get((id_carrito, id_producto))
+    
+    @staticmethod
+    def buscar_por_carrito(id):
+        return ProdCarrito.query.filter(ProdCarrito.carrito_id == id).all()
