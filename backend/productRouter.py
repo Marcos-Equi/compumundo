@@ -40,10 +40,10 @@ def get_productsByQuery(nombre):
     return jsonify({'productos': resultados}), 200
 
 @productos.route('/', methods=['POST'])
-def post_products():
+def post_product():
     data = request.get_json()
 
-    required_fields = ['nombre', 'tipo', 'precio', 'stock', 'descripcion']
+    required_fields = ['nombre', 'tipo', 'precio', 'stock', 'descripcion', 'imagen']
     for required_field in required_fields:
         if required_field not in data:
             return jsonify({'error': 'Faltan datos'}), 400
@@ -52,7 +52,8 @@ def post_products():
         not isinstance(data['tipo'], str) or \
         not isinstance(data['precio'], (int, float)) or data['precio'] <= 0 or \
         not isinstance(data['stock'], int) or \
-        not isinstance(data['descripcion'], str):
+        not isinstance(data['descripcion'], str) or \
+        not isinstance(data['imagen'], str):
         return jsonify({'error': 'Datos incorrectos'}), 400
     
 
@@ -64,7 +65,8 @@ def post_products():
         tipo=data['tipo'],
         precio=data['precio'],
         stock=data['stock'],
-        descripcion=data['descripcion']
+        descripcion=data['descripcion'],
+        imagen=data['imagen']
     )
 
     try:
@@ -75,6 +77,47 @@ def post_products():
         return jsonify({'error': str(e)}), 500
 
     return jsonify({'producto': producto.serialize()}), 201
+
+@productos.route('/many', methods=['POST'])
+def post_products():
+    data = request.get_json()
+
+    required_fields = ['nombre', 'tipo', 'precio', 'stock', 'descripcion', 'imagen']
+    for product in data:
+        for required_field in required_fields:
+            if required_field not in product:
+                return jsonify({'error': 'Faltan datos'}), 400
+
+        if not isinstance(product['nombre'], str) or \
+            not isinstance(product['tipo'], str) or \
+            not isinstance(product['precio'], (int, float)) or product['precio'] <= 0 or \
+            not isinstance(product['stock'], int) or \
+            not isinstance(product['descripcion'], str) or \
+            not isinstance(product['imagen'], str):
+            return jsonify({'error': 'Datos incorrectos'}), 400
+        
+        if (Producto.query.filter_by(nombre=product['nombre']).first()):
+            return jsonify({'error': 'Ya existe un producto con ese nombre'}), 400
+    
+    productos = []
+    for product in data:
+        producto = Producto(
+            nombre=product['nombre'],
+            tipo=product['tipo'],
+            precio=product['precio'],
+            stock=product['stock'],
+            descripcion=product['descripcion'],
+            imagen=product['imagen']
+        )
+        productos.append(producto)
+    
+    try:
+        db.session.add_all(productos)
+        db.session.commit()
+        return jsonify({'productos': [producto.serialize() for producto in productos]}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 @productos.route('/<int:id>', methods=['PATCH'])
 def patch_product(id):
@@ -113,3 +156,15 @@ def delete_product(id):
     db.session.commit()
 
     return jsonify({'Producto eliminado': producto.serialize()}), 200
+
+@productos.route('/destacados', methods=['GET'])
+def obtener_productos_destacados():
+    tipos_de_productos = ['Placa de video', 'monitor', 'teclado', 'procesador', 'mouse']
+    productos_destacados = []
+
+    for tipo in tipos_de_productos:
+        producto_mas_barato = Producto.producto_mas_barato_por_tipo(tipo)
+        if producto_mas_barato:
+            productos_destacados.append(producto_mas_barato.serialize())
+
+    return jsonify({'productos': productos_destacados}), 200

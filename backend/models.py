@@ -1,6 +1,6 @@
-import datetime
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
+import datetime
 
 db = SQLAlchemy()
 
@@ -13,7 +13,8 @@ class Producto(db.Model):
     precio = db.Column(db.Numeric(10, 2), nullable=False)
     stock = db.Column(db.Integer, nullable=False)
     descripcion = db.Column(db.Text)
-    
+    imagen = db.Column(db.String(255))  
+
     def serialize(self):
         return {
             'id': self.id,
@@ -21,7 +22,8 @@ class Producto(db.Model):
             'tipo': self.tipo,
             'precio': str(self.precio),
             'stock': self.stock,
-            'descripcion': self.descripcion
+            'descripcion': self.descripcion,
+            'imagen': self.imagen
         }
     
     @staticmethod
@@ -41,6 +43,11 @@ class Producto(db.Model):
     @staticmethod
     def buscar_por_id(id):
         return Producto.query.get(id)
+    
+    @staticmethod
+    def producto_mas_barato_por_tipo(tipo):
+        producto_mas_barato = Producto.query.filter_by(tipo=tipo).order_by(Producto.precio).first()
+        return producto_mas_barato
 
 class Carrito(db.Model):
     __tablename__ = 'carritos'
