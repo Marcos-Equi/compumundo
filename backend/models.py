@@ -48,6 +48,7 @@ class Producto(db.Model):
         producto_mas_barato = Producto.query.filter_by(tipo=tipo).order_by(Producto.precio).first()
         return producto_mas_barato
 
+
 class IniciarSesion(db.Model):
     __tablename__ = 'iniciar_sesion'
     
