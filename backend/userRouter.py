@@ -19,3 +19,19 @@ def register():
         return jsonify({'message': 'Usuario registrado correctamente'}), 201
     else:
         return jsonify({'error': 'Faltan datos obligatorios'}), 400
+    
+
+@user_router.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    nombre = data.get('nombre')
+    contraseña = data.get('contraseña')
+
+    if nombre and contraseña:
+        usuario = IniciarSesion.query.filter_by(nombre=nombre, contraseña=contraseña).first()
+        if usuario:
+            return jsonify({'message': 'Inicio de sesión exitoso'}), 200
+        else:
+            return jsonify({'error': 'Nombre o contraseña incorrectos'}), 401
+    else:
+        return jsonify({'error': 'Faltan datos obligatorios'}), 400
