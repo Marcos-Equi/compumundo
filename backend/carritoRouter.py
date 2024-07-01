@@ -20,7 +20,7 @@ def create_cart():
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
-    return jsonify({'carrito': carrito.serialize([])}), 201
+    return jsonify({'carrito': carrito.serialize()}), 201
 
 @carritos.route('/<int:id>', methods=['DELETE'])
 def delete_cart(id):
