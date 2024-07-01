@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Blueprint
+from flask import Flask, render_template, Blueprint, request
 from flask_cors import CORS
 from models import db
 from config import Config
@@ -21,6 +21,9 @@ def index():
 
 @app.route('/producto')
 def product():
+    id = request.args.get('id')
+    if id:
+        return render_template('detallesProd.html')
     return render_template('products.html')
 
 app.register_blueprint(api)
