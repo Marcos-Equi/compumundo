@@ -1,6 +1,8 @@
 function imprimirDatos(data) {
     let imagenCont = document.getElementById('imagen_cont')
     let imagen = document.createElement('img')
+    imagen.classList.add('rounded-4')
+    imagen.classList.add('fit')
     imagen.src = data.imagen
     imagenCont.appendChild(imagen)
 

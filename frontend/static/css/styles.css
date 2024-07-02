@@ -56,6 +56,12 @@ body {
     transition: transform 0.2s;
 }
 
+.precio_prod {
+    margin-top: auto;
+    font-size: 1.3rem;
+    color: rgb(0, 80, 154);
+}
+
 .featured-product img {
     width: 100px;
     height: 100px;
@@ -63,14 +69,11 @@ body {
     border-radius: 4px;
 }
 
-.featured-product p {
-    margin: 0;
-    font-size: 14px;
-    color: #333;
-}
 
 .featured-product:hover {
-    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.1s;
+    background-color: #d9d9d9;
 }
 
 #sidebar-wrapper {

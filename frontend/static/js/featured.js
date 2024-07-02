@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var productDiv = document.createElement('div');
                 productDiv.classList.add('featured-product');
                 productDiv.addEventListener('click', function () {
-                    window.location.href = `/producto/${encodeURIComponent(producto.nombre)}`;
+                    window.location.href = `/producto?id=${producto.id}`;
                 });
 
                 var productImage = document.createElement('img');
@@ -21,12 +21,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 productImage.alt = producto.nombre;
                 productDiv.appendChild(productImage);
 
-                var productName = document.createElement('h3');
+                var productName = document.createElement('h4');
                 productName.textContent = producto.nombre;
                 productDiv.appendChild(productName);
 
                 var productPrice = document.createElement('p');
-                productPrice.textContent = `Precio: ${producto.precio} USD`;
+                let precio = parseFloat(producto.precio).toLocaleString("es-ES", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })
+                productPrice.textContent = `$ ${precio}`;
+                productPrice.classList.add('precio_prod');
                 productDiv.appendChild(productPrice);
 
                 featuredProductsContainer.appendChild(productDiv);
