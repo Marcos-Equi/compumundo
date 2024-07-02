@@ -13,7 +13,7 @@ def get_cart(id):
 @carritos.route('/', methods=['POST'])
 def create_cart():
     data = request.get_json()
-    carrito = Carrito(nombre_usuario=data['nombre'])
+    carrito = Carrito(usuario_id=data['id_usuario'])
     try:
         db.session.add(carrito)
         db.session.commit()
