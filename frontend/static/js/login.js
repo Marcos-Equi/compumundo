@@ -60,6 +60,7 @@ function loginUser() {
     .then(response => response.json())
     .then(data => {
         if (data.message === 'Inicio de sesión exitoso') {
+            localStorage.setItem('usuario', nombre); 
             window.location.href = '/';
         } else {
             document.getElementById('loginError').style.display = 'block';
