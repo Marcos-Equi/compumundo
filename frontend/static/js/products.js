@@ -2,6 +2,10 @@
 function printProducts(products) {
     let container = document.querySelector('.product-container');
     for (const prod of products) {
+        let precio = parseFloat(prod.precio).toLocaleString("es-ES", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
         const productCard = `
             <div class="col-12 product-card">
                 <div class="card">
@@ -10,12 +14,11 @@ function printProducts(products) {
                             <img src=${prod.imagen} class="img-fluid rounded-start card-img"
                                 alt=${prod.imagen}>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">${prod.nombre}</h5>
-                                <p class="card-text">${prod.descripcion}</p>
-                                <a href="#" class="btn btn-primary">Agregar al carrito</a>
-                            </div>
+                        <div class="col-md-8 card-body d-flex flex-column">
+                            <a href='/producto?id=${prod.id}' class="card-title">${prod.nombre}</a>
+                            <p class="card-text">${prod.descripcion}</p>
+                            <span class="precio_prod">$ ${precio}</span>
+                            <a href="#" class="btn btn-primary mt-auto" id="agregar_car">Agregar al carrito</a>
                         </div>
                     </div>
                 </div>

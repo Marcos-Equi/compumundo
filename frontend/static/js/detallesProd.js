@@ -8,7 +8,10 @@ function imprimirDatos(data) {
     nombre.innerHTML = data.nombre
 
     let precio = document.getElementById('precio_prod')
-    precio.innerHTML = `$${data.precio}`
+    precio.innerHTML = `$${parseFloat(data.precio).toLocaleString("es-ES", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })}`
 
     let descripcion = document.getElementsByClassName('descripcion_prod')
     descripcion[0].innerHTML = data.descripcion
@@ -47,6 +50,7 @@ async function imprimirSimilares(tipo) {
             i++
             continue
         }
+        console.log(similares[i].id);
         contenedor.innerHTML += `
             <div class="d-flex mb-3">
                 <a href="/producto?id=${similares[i].id}" class="me-3">
@@ -54,8 +58,13 @@ async function imprimirSimilares(tipo) {
                         style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
                 </a>
                 <div class="info">
-                    <a href="#" class="nav-link mb-1">${similares[i].nombre}</a>
-                    <strong class="text-dark"> $${similares[i].precio}</strong>
+                    <a href="/producto?id=${similares[i].id}" class="nav-link mb-1">${similares[i].nombre}</a>
+                    <strong class="text-dark"> 
+                        $${parseFloat(similares[i].precio).toLocaleString("es-ES", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })}
+                    </strong>
                 </div>
             </div>
         `
@@ -77,11 +86,15 @@ function cargarProd() {
         })
 }
 
-async function sumRestCant(op) {
+function sumRestCant(op) {
     let stockCont = document.getElementById('stock_cont')
     let stock = parseInt(stockCont.maximo)
     let cant = parseInt(stockCont.placeholder)
     let botonesStock = document.getElementsByClassName('boton_stock')
+    if (cant > stock)
+        cant = stock
+    else if (cant < 1)
+        cant = 1
 
     if (cant + op == stock && botonesStock[1].disabled == false)
         botonesStock[1].disabled = true
@@ -92,7 +105,5 @@ async function sumRestCant(op) {
         botonesStock[1].disabled = false
     }
     stockCont.placeholder = cant + op
-
 }
-
 cargarProd()
