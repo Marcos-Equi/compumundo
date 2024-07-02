@@ -1,0 +1,39 @@
+.footer {
+    background-color: #212529;
+    padding-right: 3%;
+    padding-top: 1.5%;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+.footer-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 5%;
+    width: 100%;
+}
+
+.footer-menu ul {
+    list-style: none;
+    border-left: 1px rgb(255, 255, 255) solid;
+    padding-left: 2%;
+}
+
+.footer-menu ul li {
+    padding-top: 5%;
+    margin: auto;
+}
+
+.footer-menu__item a {
+    line-height: 100%;
+    text-decoration: none;
+    color: rgb(195, 195, 195);
+    font-size: 17px;
+    padding-inline: 2px;
+}
+
+.footer-menu__item a:hover {
+    color: rgb(255, 255, 255);
+}
