@@ -27,3 +27,10 @@ body {
 .btn-primary, .btn-secondary {
     width: 100%;
 }
+
+#loginError {
+    display: none;
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
