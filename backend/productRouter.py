@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
 from models import Producto, db
-from sqlalchemy import func
 
 productos = Blueprint('productos', __name__, url_prefix='/productos')
 
