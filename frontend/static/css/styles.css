@@ -9,7 +9,7 @@ body {
     color: #ddd;
 }
 
-.container {
+/* .container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,7 +67,7 @@ body {
 
 .search-bar button:hover {
     background-color: #004494;
-}
+} */
 
 #results-container {
     width: 100%;
