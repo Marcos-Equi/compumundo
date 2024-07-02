@@ -20,13 +20,14 @@
     padding: 10px;
 }
 
-.card-title {
+.titulo_prod {
     text-decoration: none;
+    width: auto;
     color: black;
     font-size: 1.5rem;
     transition: 0.2s;
 }
-.card-title:hover {
+.titulo_prod:hover {
     color: rgb(25, 98, 4);
     transition: 0.1s;
 }
