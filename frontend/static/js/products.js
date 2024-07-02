@@ -10,7 +10,7 @@ function printProducts(products) {
         const productCard = `
             <div class="col-12 product-card">
                 <div class="card">
-                    <div class="row g-0">
+                    <div class="row g-0 data_prod">
                         <div class="col-md-4">
                             <img src=${prod.imagen} class="img-fluid rounded-start card-img"
                                 alt=${prod.imagen}>
