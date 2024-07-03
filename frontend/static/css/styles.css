@@ -6,6 +6,25 @@ body {
     color: #ddd;
 }
 
+.carousel {
+    height: 540px;
+    margin: 68px auto;
+    overflow: hidden;
+}
+
+.carousel img {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-control-prev-icon {
+    color: black !important;
+    padding: 10px !important;
+    border-radius: 50% !important;
+}
+
 .page-container {
     display: flex;
     flex-direction: column;
@@ -94,5 +113,19 @@ body {
 .navbar {
     position: fixed;
     width: 100%;
+    padding-block: 15px !important;
     top: 0;
+}
+
+#titulo_header {
+    font-family: "Rubik Mono One", monospace;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0 !important;
+    color: rgb(32, 125, 255);
+}
+#titulo_header:hover i{
+    color: rgb(34, 255, 0);
+    text-shadow: #8cff99 1px 0px 3px;
+    transition: 0.1s;
 }
