@@ -33,7 +33,6 @@ def cart():
     return render_template('carts.html')
 
 app.register_blueprint(api)
-app.register_blueprint(carritos)
 app.register_blueprint(user_router, url_prefix='/usuarios')
 
 if __name__ == '__main__':
