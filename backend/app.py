@@ -28,6 +28,10 @@ def product():
 def iniciar_sesion():
     return render_template('login.html')
 
+@app.route('/carrito')
+def cart():
+    return render_template('carts.html')
+
 app.register_blueprint(api)
 app.register_blueprint(carritos)
 app.register_blueprint(user_router, url_prefix='/usuarios')

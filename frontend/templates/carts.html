@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="../static/css/carts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <!-- Container wrapper -->
+        <div class="container-fluid justify-content-between">
+            <!-- Toggle button -->
+            <button data-mdb-collapse-init class="navbar-toggler" type="button"
+                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
+                <a class="navbar-brand mt-2 mt-lg-0" href="/">
+                    <h3>CompuMundo</h3>
+                </a>
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/producto">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ayuda</a>
+                    </li>
+                </ul>
+
+                <!-- Centered Search Form -->
+                <form class="d-flex search-form me-4" role="search">
+                    <input class="form-control me-2" id="search-input" type="text" placeholder="Buscar productos"
+                        aria-label="Buscar">
+                    <button class="btn btn-outline-light" id="search-button" type="submit">Buscar</button>
+                </form>
+
+                <!-- Left links -->
+            </div>
+            <!-- Collapsible wrapper -->
+            <!-- Right elements -->
+            <div class="d-flex align-items-center">
+                <!-- Icon -->
+                <a class="text-reset me-3" href="#">
+                    <i class="fas fa-shopping-cart carrito"></i>
+                </a>
+                <!-- Avatar -->
+                <a class="d-flex align-items-center" href="#" id="navbarDropdownMenuAvatar" role="button"
+                    aria-expanded="false">
+                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25"
+                        alt="Black and White Portrait of a Man" loading="lazy" />
+                </a>
+                <a class="btn btn-outline-light ms-3" id="login-button" href="/iniciar_sesion">Iniciar Sesión</a>
+            </div>
+            <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+    </header>
+
+    <!-- Shopping cart -->
+    <section class="h-100">
+        <div class="container h-100 py-5">
+            <div class="row d-flex cart-container justify-content-center align-items-center h-100">
+                <div class="col-10 cart-item-container">
+        
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="fw-normal mb-0">Mi Carrito</h3>
+                        <div>
+                        <p class="mb-0"><span class="text-muted">Filtrar por:</span> <a href="#!" class="text-body">Precio <i
+                                class="fas fa-angle-down mt-1"></i></a></p>
+                        </div>
+                    </div>
+
+                    <!-- Cart items -->
+      
+                </div>
+
+                <div class="col-10">
+                    <div class="card mb-4">
+                        <div class="card-body p-4 d-flex flex-row">
+                            <h5 class="mb-0">Total</h5>
+                        </div>
+                    </div>
+        
+                    <div class="card">
+                        <div class="card-body">
+                        <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-block btn-lg">Finalizar Compra</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shopping cart -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuario = localStorage.getItem('usuario');
+            const loginButton = document.getElementById('login-button');
+            
+            if (usuario) {
+                loginButton.textContent = 'Cerrar Sesión';
+                loginButton.href = '#';
+                loginButton.addEventListener('click', () => {
+                    localStorage.removeItem('usuario');
+                    window.location.href = '/';
+                });
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="/static/js/search.js"></script>
+    <script src="/static/js/carts.js"></script>
+</body>
+
+</html>
