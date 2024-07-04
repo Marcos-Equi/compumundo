@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
 <body>
@@ -114,7 +115,14 @@
             </div>
             <div class="featured-products">
                 <h2>Productos Destacados</h2>
-                <div class="featured-products-row" id="featured-products-container"></div>
+                <div class="container">
+                    <i class="fa-solid fa-arrow-left btn-featured"></i>
+                    <div class="swiper">
+                        <div class="featured-products-row swiper-wrapper" id="featured-products-container"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <i class="fa-solid fa-arrow-right btn-featured"></i>
+                </div>
             </div>
         </div>
         <footer class="footer">
@@ -153,6 +161,7 @@
                 </ul>
             </nav>
         </footer>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script src="../static/js/btnIniciarSesion.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

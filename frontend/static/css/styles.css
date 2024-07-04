@@ -32,53 +32,94 @@ body {
 }
 
 .content-wrap {
+    display: flex;
+    flex-direction: column;
     flex: 1;
-}
-
-#results-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 20px auto;
-    text-align: left;
+    background-color: #ececec;
 }
 
 .featured-products {
-    width: 100%;
     padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+}
+
+.featured-products .container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+}
+
+.featured-products .swiper {
+    height: 400px;
 }
 
 .featured-products h2 {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.featured-products-row {
-    display: flex;
-    justify-content: space-between;
-    overflow-x: auto;
+.btn-featured {
+    color: rgb(32, 125, 255);
+    background-color: white;
+    border-radius: 50%;
+    padding: 20px;
+    box-shadow: rgba(140, 140, 140, 0.695) 1px 0px 3px;
+}
+
+.fa-arrow-left, .fa-arrow-right {
+    position: relative;
+    font-size: 20px;
+    z-index: 10;
+}
+
+.fa-arrow-left:hover, .fa-arrow-right:hover {
+    box-shadow: #9d9d9d 1px 1px 8px;
+    transition: 0.2s;
+}
+
+.fa-arrow-right {
+    right: 2% !important;
+}
+
+.fa-arrow-left {
+    left: 2% !important;
 }
 
 .featured-product {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 18%;
+    height: 350px !important;
+    min-width: 250px !important;
     text-align: center;
+    align-items: center;
     margin: 0 5px;
     padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    background-color: #ffffff;
     border-radius: 4px;
     cursor: pointer;
     transition: transform 0.2s;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.featured-product:hover {
+    box-shadow: 2px 2px 6px rgb(169, 169, 169);
+    transition: 0.1s;
 }
 
 .precio_prod {
     margin-top: auto;
+    position: absolute;
+    bottom: 60px;
     font-size: 1.3rem;
     color: rgb(0, 80, 154);
+}
+
+.agregar_car {
+    margin-bottom: 10px;
 }
 
 .featured-product img {
@@ -88,12 +129,6 @@ body {
     border-radius: 4px;
 }
 
-
-.featured-product:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: 0.1s;
-    background-color: #d9d9d9;
-}
 
 #sidebar-wrapper {
     width: 250px;
