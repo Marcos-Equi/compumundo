@@ -53,6 +53,7 @@ class Carrito(db.Model):
     __tablename__ = 'carritos'
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('iniciar_sesion.id'))
+    precio_total = db.Column(db.Numeric(10, 2), default=0.00)
     fecha_creacion = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def serialize(self):
@@ -62,6 +63,7 @@ class Carrito(db.Model):
             'id': self.id,
             'items': lista_items,
             'id_usuario': self.usuario_id,
+            'precio_total': self.precio_total,
             'fecha_creacion': self.fecha_creacion
         }
     
@@ -80,7 +82,7 @@ class ProdCarrito(db.Model):
         info_producto = {
             'nombre': producto.nombre,
             'tipo': producto.tipo,
-            'precio': producto.precio,
+            'precio': producto.precio * self.cantidad,
             'descripcion': producto.descripcion,
             'imagen': producto.imagen
         }
