@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             data.productos.forEach(producto => {
                 var productDiv = document.createElement('div');
                 productDiv.classList.add('featured-product', 'swiper-slide');
-                // productDiv.setAttribute('data-swiper-autoplay', '5000')
                 productDiv.addEventListener('click', function () {
                     window.location.href = `/producto?id=${producto.id}`;
                 });
@@ -48,10 +47,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             console.error('Error al obtener productos destacados:', error);
         });
 
-    const swiper = new Swiper('.swiper', {
+    const swiper = new Swiper('.swiper.destacados', {
         slidesPerView: 4,
         spaceBetween: 10,
         loop: true,
+        speed: 1000,
         centerSlide: 'true',
         pagination: {
             el: ".swiper-pagination",
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             dynamicBullets: true,
         },
         autoplay: {
-            delay: 4000
+            delay: 4000,
         },
         navigation: {
             nextEl: ".fa-arrow-right",

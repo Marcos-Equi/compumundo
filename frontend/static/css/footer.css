@@ -1,13 +1,31 @@
 .footer {
     background-color: #212529;
     padding-right: 3%;
-    padding-top: 1.5%;
     width: 100%;
     position: relative;
     bottom: 0;
+    margin-top: 50px;
+}
+
+.footer .marcas {
+    width: 100vw;
+    background-color: #ececec;
+}
+
+.footer .marca {
+    display: flex;
+    justify-items: end;
+    justify-content: center;
+    padding-top: 2%;
+}
+
+.footer .marca img {
+    max-height: 100px;
+    width: auto;
 }
 
 .footer-menu {
+    margin-top: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

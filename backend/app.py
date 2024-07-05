@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Blueprint, request  
+from flask import Flask, render_template, Blueprint, request, send_from_directory  
 from flask_cors import CORS
 from models import db
 from config import Config
@@ -30,6 +30,10 @@ def product():
 @app.route('/iniciar_sesion')
 def iniciar_sesion():
     return render_template('login.html')
+
+@app.route('/img/<path:filename>')
+def send_img(filename):
+    return send_from_directory('../frontend/img', filename)
 
 app.register_blueprint(api)
 app.register_blueprint(carritos)
