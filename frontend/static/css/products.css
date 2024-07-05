@@ -2,8 +2,9 @@
     margin-top: 67px;
 }
 
-.content-wrap {
-    background-color: #f4f3f3;
+.page-container {
+    background-color: #ececec;
+    overflow-x: hidden;
 }
 
 .card {
@@ -53,14 +54,19 @@
 }
 
 #content-wrapper {
-    width: auto !important;
+    margin-top: 18px;
+    width: 250px;
+    height: 100%;
+    padding-bottom: 70px;
 }
 
 #sidebar-wrapper {
     background-color: white;
     box-shadow: #cdcdcd 0px 0px 10px 0px;
     height: 60% !important;
+    width: 250px !important;
     margin: 20px;
+    padding-bottom: 45px;
 }
 
 .sidebar-heading {
@@ -71,9 +77,11 @@
 
 .list-group-item {
     padding-block: 12px !important;
+    padding-left: 30px !important;
     color: rgb(51, 51, 51) !important;
     border: none !important;
     font-size: 1.1rem;
+
 }
 
 .list-group-item:hover {

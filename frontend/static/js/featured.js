@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     var featuredProductsContainer = document.getElementById('featured-products-container');
 
-    fetch('/api/productos/destacados')
+    await fetch('/api/productos/destacados')
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             data.productos.forEach(producto => {
                 var productDiv = document.createElement('div');
-                productDiv.classList.add('featured-product');
+                productDiv.classList.add('featured-product', 'swiper-slide');
                 productDiv.addEventListener('click', function () {
                     window.location.href = `/producto?id=${producto.id}`;
                 });
@@ -34,10 +34,37 @@ document.addEventListener('DOMContentLoaded', function () {
                 productPrice.classList.add('precio_prod');
                 productDiv.appendChild(productPrice);
 
+                let addToCartButton = document.createElement('a');
+                addToCartButton.href = '#';
+                addToCartButton.textContent = 'Agregar al carrito';
+                addToCartButton.classList.add('btn', 'btn-primary', 'mt-auto', 'agregar_car');
+                productDiv.appendChild(addToCartButton);
+
                 featuredProductsContainer.appendChild(productDiv);
             });
         })
         .catch(error => {
             console.error('Error al obtener productos destacados:', error);
         });
-});
+
+    const swiper = new Swiper('.swiper.destacados', {
+        slidesPerView: 4,
+        spaceBetween: 10,
+        loop: true,
+        speed: 1000,
+        centerSlide: 'true',
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            dynamicBullets: true,
+        },
+        autoplay: {
+            delay: 4000,
+        },
+        navigation: {
+            nextEl: ".fa-arrow-right",
+            prevEl: ".fa-arrow-left",
+        }
+    });
+})
+
