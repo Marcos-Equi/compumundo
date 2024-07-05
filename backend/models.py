@@ -82,7 +82,8 @@ class ProdCarrito(db.Model):
         info_producto = {
             'nombre': producto.nombre,
             'tipo': producto.tipo,
-            'precio': producto.precio * self.cantidad,
+            'precio': producto.precio,
+            'stock': producto.stock,
             'descripcion': producto.descripcion,
             'imagen': producto.imagen
         }

@@ -62,14 +62,15 @@ def update_item(id, id_producto):
     try:
         if not item_carrito:
             return jsonify({'error': 'Item no encontrado'}), 404
-        actual_precio_item = producto.precio * item_carrito.cantidad
-        item_carrito.cantidad = data['cantidad']
-        nuevo_precio_item = producto.precio * item_carrito.cantidad
-        if nuevo_precio_item > actual_precio_item:
-            carrito.precio_total += (nuevo_precio_item - actual_precio_item)
-        else:
-            carrito.precio_total -= (actual_precio_item - nuevo_precio_item)
-        db.session.commit()
+        nueva_cantidad = data['cantidad']
+        if (nueva_cantidad > 0) and (nueva_cantidad <= producto.stock):
+            if nueva_cantidad > item_carrito.cantidad:
+                carrito.precio_total += (producto.precio * (nueva_cantidad - item_carrito.cantidad))
+            else:
+                carrito.precio_total -= (producto.precio * (item_carrito.cantidad - nueva_cantidad))
+
+            item_carrito.cantidad = nueva_cantidad
+            db.session.commit()
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500    

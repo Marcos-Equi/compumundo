@@ -15,6 +15,7 @@ function printEmptyCart() {
 };
 
 function printCartItem(container, item) {
+    let itemPrice = (parseFloat(item.info_producto.precio) * item.cantidad).toFixed(2);
     const itemTableRow = `
     <div class="card rounded-3 mb-4 text-bg-light" id="item-${item.producto_id}">
         <div class="card-body p-4">
@@ -37,11 +38,13 @@ function printCartItem(container, item) {
                         id="btn-qty-down-${item.producto_id}"
                         name="${item.producto_id}"
                         onclick="this.parentNode.querySelector('input[type=number]').stepDown();
-                            updateItemPriceDown();">
+                            updateItem(this.id);">
                         <i class="fas fa-minus"></i>
                     </button>
 
-                    <input id="form-qty-${item.producto_id}" min="1" name="quantity" type="number"
+                    <input id="form-qty-${item.producto_id}"
+                        min="1" max="${item.info_producto.stock}"
+                        name="quantity" type="number"
                         value="${item.cantidad}"
                         class="form-control form-control-sm"/>
 
@@ -50,14 +53,14 @@ function printCartItem(container, item) {
                         id="btn-qty-up-${item.producto_id}"
                         name="${item.producto_id}"
                         onclick="this.parentNode.querySelector('input[type=number]').stepUp();
-                            updateItemPriceUp();">
+                            updateItem(this.id);">
                         <i class="fas fa-plus"></i>
                     </button>
                 </div>
 
                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                     <h5 class="mb-0">$ 
-                        <span id="price-${item.producto_id}">${item.info_producto.precio}</span>
+                        <span id="price-${item.producto_id}">${itemPrice}</span>
                     </h5>
                 </div>
 
@@ -109,6 +112,38 @@ function updateTotalPrice(price) {
     totalPriceContainer.innerText = price;
 };
 
+function updateItem(elementID) {
+    const params = new URLSearchParams(window.location.search);
+    let cartID = params.get('id');
+
+    let boton = document.getElementById(elementID);
+    let productoID = boton.getAttribute('name');
+    let inputQuantity = document.getElementById(`form-qty-${productoID}`).valueAsNumber;
+    let itemPriceContainer = document.getElementById(`price-${productoID}`);
+
+    fetch(`/api/carritos/${cartID}/producto/${productoID}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 'cantidad': inputQuantity }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error al obtener item:', data.error);
+                return;
+            }
+            let itemPrice = (parseFloat(data.item.info_producto.precio) * data.item.cantidad).toFixed(2);
+            itemPriceContainer.innerText = itemPrice;
+            updateTotalPrice(data.precio_total);
+            
+        })
+        .catch(error => {
+            console.error('Error al obtener item:', error);
+        });
+};
+
 function deleteCartItem(elementID) {
     const params = new URLSearchParams(window.location.search);
     let cartID = params.get('id');
@@ -142,7 +177,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let cartID = params.get('id');
 
     if (cartID) {
-        fetch(`/api/carritos/${cartID}`)
+        fetch(`/api/carritos/${cartID}`, {
+            method: "GET"
+        })        
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
