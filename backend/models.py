@@ -106,6 +106,7 @@ class IniciarSesion(db.Model):
     apellido = db.Column(db.String(100), nullable=False)
     contraseña = db.Column(db.String(255), nullable=False)
     lista_compra = db.Column(db.Text, nullable=True)
+    respuesta = db.Column(db.String(255), nullable=True)  
     
     def __repr__(self):
         return f'<IniciarSesion {self.nombre} {self.apellido}>'
@@ -116,5 +117,6 @@ class IniciarSesion(db.Model):
             'nombre': self.nombre,
             'apellido': self.apellido,
             'contraseña': self.contraseña,
-            'lista_compra': self.lista_compra
+            'lista_compra': self.lista_compra,
+            'respuesta': self.respuesta  
         }
