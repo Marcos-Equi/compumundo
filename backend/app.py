@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Blueprint  
+from flask import Flask, render_template, Blueprint, request, send_from_directory  
 from flask_cors import CORS
 from models import db
 from config import Config
@@ -22,6 +22,9 @@ def index():
 
 @app.route('/producto')
 def product():
+    id = request.args.get('id')
+    if id:
+        return render_template('detallesProd.html')
     return render_template('products.html')
 
 @app.route('/iniciar_sesion')
@@ -31,6 +34,10 @@ def iniciar_sesion():
 @app.route('/carrito')
 def cart():
     return render_template('carts.html')
+
+@app.route('/img/<path:filename>')
+def send_img(filename):
+    return send_from_directory('../frontend/img', filename)
 
 app.register_blueprint(api)
 app.register_blueprint(user_router, url_prefix='/usuarios')

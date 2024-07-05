@@ -1,0 +1,13 @@
+#datos_producto {
+    margin-top: 67px;
+}
+
+#imagen_cont img {
+    max-width: 100%; 
+    max-height: 100vh; 
+    margin: auto
+}
+
+.especificaciones {
+    background-color: #f1f0f0;
+}

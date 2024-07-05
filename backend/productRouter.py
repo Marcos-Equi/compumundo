@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
 from models import Producto, db
-from sqlalchemy import func
 
 productos = Blueprint('productos', __name__, url_prefix='/productos')
 
@@ -159,7 +158,7 @@ def delete_product(id):
 
 @productos.route('/destacados', methods=['GET'])
 def obtener_productos_destacados():
-    tipos_de_productos = ['Placa de video', 'monitor', 'teclado', 'procesador', 'mouse']
+    tipos_de_productos = ['tarjeta grafica', 'monitor', 'perifericos', 'procesador', 'almacenamiento', 'gabinete', 'fuente de poder', 'memoria ram', 'placa madre', 'otros']
     productos_destacados = []
 
     for tipo in tipos_de_productos:
