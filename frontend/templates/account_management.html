@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Cuenta</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <button id="mi-cuenta" class="sidebar-btn">Mi Cuenta</button>
+            <button id="mis-compras" class="sidebar-btn">Mis Compras</button>
+            <button id="salir" class="sidebar-btn">Salir</button>
+        </div>
+        <div class="content">
+            <div id="mi-cuenta-content" class="content-section">
+                <h2>Datos de Contacto</h2>
+                <form>
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre"><br><br>
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido"><br><br>
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="telefono" name="telefono"><br><br>
+                    <label for="documento">Documento:</label>
+                    <input type="text" id="documento" name="documento"><br><br>
+                    <input type="submit" value="Guardar">
+                </form>
+            </div>
+            <div id="mis-compras-content" class="content-section" style="display:none;">
+                <h2>Mis Compras</h2>
+            </div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html>
