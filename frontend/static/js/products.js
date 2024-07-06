@@ -12,8 +12,10 @@ function printProducts(products) {
                 <div class="card">
                     <div class="row g-0 data_prod">
                         <div class="col-md-4">
-                            <img src=${prod.imagen} class="img-fluid rounded-start card-img"
-                                alt=${prod.imagen}>
+                            <a href='/producto?id=${prod.id}'>
+                                <img src=${prod.imagen} class="img-fluid rounded-start card-img"
+                                    alt=${prod.imagen}>
+                            </a>
                         </div>
                         <div class="col-md-8 card-body d-flex flex-column">
                             <div class="card-title">
