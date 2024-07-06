@@ -31,6 +31,10 @@ def product():
 def ayuda():
     return render_template('ayuda.html')
 
+@app.route('/contacto')
+def contacto():
+    return render_template('contacto.html')
+
 @app.route('/iniciar_sesion')
 def iniciar_sesion():
     return render_template('login.html')
