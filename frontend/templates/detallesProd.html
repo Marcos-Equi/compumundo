@@ -20,24 +20,17 @@
 
 <body>
     <div class="page-container">
-        <!-- Navbar -->
         <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <!-- Container wrapper -->
             <div class="container-fluid justify-content-between">
-                <!-- Toggle button -->
                 <button data-mdb-collapse-init class="navbar-toggler" type="button"
                     data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars"></i>
                 </button>
-
-                <!-- Collapsible wrapper -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Navbar brand -->
                     <a class="navbar-brand mt-2 mt-lg-0" href="/">
                         <h3 id="titulo_header"><i class="fa-solid fa-laptop-code"></i>CompuMundo</h3>
                     </a>
-                    <!-- Left links -->
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="/producto">Productos</a>
@@ -49,24 +42,16 @@
                             <a class="nav-link" href="/ayuda">Ayuda</a>
                         </li>
                     </ul>
-
-                    <!-- Centered Search Form -->
                     <form class="d-flex search-form me-4" role="search">
                         <input class="form-control me-2" id="search-input" type="text" placeholder="Buscar productos"
                             aria-label="Buscar">
                         <button class="btn btn-outline-light" id="search-button" type="submit">Buscar</button>
                     </form>
-
-                    <!-- Left links -->
                 </div>
-                <!-- Collapsible wrapper -->
-                <!-- Right elements -->
                 <div class="d-flex align-items-center">
-                    <!-- Icon -->
                     <a class="text-reset me-3" href="#">
                         <i class="fas fa-shopping-cart carrito"></i>
                     </a>
-                    <!-- Avatar -->
                     <a class=" d-flex align-items-center" href="#" id="navbarDropdownMenuAvatar" role="button"
                         aria-expanded="false">
                         <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25"
@@ -75,9 +60,7 @@
                     <a class="btn btn-outline-light ms-3" id="login-button" href="/iniciar_sesion">Iniciar
                         Sesión</a>
                 </div>
-                <!-- Right elements -->
             </div>
-            <!-- Container wrapper -->
         </header>
 
         <section class="py-5" id="datos_producto">
@@ -122,7 +105,6 @@
                             <hr />
 
                             <div class="row mb-4">
-                                <!-- col.// -->
                                 <div class="col-md-4 col-6 mb-3">
                                     <label class="mb-2 d-block">Cantidad</label>
                                     <div class="input-group mb-3" style="width: 170px;">
@@ -150,13 +132,11 @@
                 </div>
             </div>
         </section>
-        <!-- content -->
         <section class="border-top border-bottom py-4 especificaciones">
             <div class="container">
                 <div class="row gx-4">
                     <div class="col-lg-8 mb-4">
                         <div class="border rounded-2 px-3 py-2 bg-white">
-                            <!-- Pills navs -->
                             <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                                 <li class="nav-item d-flex" role="presentation">
                                     <a class="nav-link d-flex align-items-center justify-content-center w-100 active"
@@ -164,9 +144,6 @@
                                         aria-controls="ex1-pills-1" aria-selected="true">Especificaciones</a>
                                 </li>
                             </ul>
-                            <!-- Pills navs -->
-
-                            <!-- Pills content -->
                             <div class="tab-content" id="ex1-content">
                                 <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel"
                                     aria-labelledby="ex1-tab-1">
@@ -243,10 +220,10 @@
             </div>
             <nav class="footer-menu">
                 <ul class="foot-bl1">
-                    <li class="footer-menu__item "><a href="#" target="_self">Formas de pago</a></li>
-                    <li class="footer-menu__item"><a href="#" target="_self">Políticas y garantía</a></li>
-                    <li class="footer-menu__item"><a href="#" target="_self">Financiación</a></li>
-                    <li class="footer-menu__item"><a href="#" target="_self">Envíos</a></li>
+                    <li class="footer-menu__item "><a href="/ayuda" target="_self">Formas de pago</a></li>
+                    <li class="footer-menu__item"><a href="/ayuda" target="_self">Políticas y garantía</a></li>
+                    <li class="footer-menu__item"><a href="/ayuda" target="_self">Financiación</a></li>
+                    <li class="footer-menu__item"><a href="/ayuda" target="_self">Envíos</a></li>
                     <li class="footer-menu__item"><a href="#" target="_self">Servicio al cliente</a></li>
                     <li class="footer-menu__item"><a href="#" target="_self">Nosotros</a></li>
                 </ul>
@@ -262,8 +239,8 @@
                                 class="fa-brands fa-square-facebook"></i> Facebook</a></li>
                     <li class="footer-menu__item"><a href="https://www.youtube.com" target="_blank"><i
                                 class="fa-brands fa-youtube"></i> Youtube</a></li>
-                    <li class="footer-menu__item"><a href="#" target="_self">¿Cómo comprar?</a></li>
-                    <li class="footer-menu__item"><a href="#" target="_self">Preguntas frecuentes</a></li>
+                    <li class="footer-menu__item"><a href="/ayuda" target="_self">¿Cómo comprar?</a></li>
+                    <li class="footer-menu__item"><a href="/ayuda" target="_self">Preguntas frecuentes</a></li>
                 </ul>
                 <ul class="foot-bl3">
                     <li class="footer-menu__item"><a href="https://www.google.com.ar/maps" target="_blank">CABA
