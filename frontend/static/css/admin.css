@@ -67,6 +67,7 @@ body {
     padding: 20px;
     background-color: #f9f9f9;
     overflow-y: auto;
+    margin-bottom: 40px; 
 }
 
 .form-row {
