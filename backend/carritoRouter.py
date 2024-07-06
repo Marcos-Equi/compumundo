@@ -13,10 +13,13 @@ def get_cart(id):
 @carritos.route('/', methods=['POST'])
 def create_cart():
     data = request.get_json()
-    carrito = Carrito(usuario_id=data['id_usuario'])
+    id_usuario = int(data['id_usuario'])
+    carrito = Carrito.buscar_por_usuario(data['id_usuario'])
     try:
-        db.session.add(carrito)
-        db.session.commit()
+        if not carrito:
+            carrito = Carrito(usuario_id=data['id_usuario'])
+            db.session.add(carrito)
+            db.session.commit()
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500    
@@ -33,20 +36,22 @@ def delete_cart(id):
 
 @carritos.route('/<int:id>/producto/<int:id_producto>', methods=['POST'])
 def add_item(id, id_producto):
+    data = request.get_json()
     carrito = Carrito.buscar_por_id(id)
     producto = Producto.buscar_por_id(id_producto)
     item_carrito = ProdCarrito.buscar_por_id(id, id_producto)
+    item_cant = int(data['cantidad'])
     try:
         if not item_carrito:
             item_carrito = ProdCarrito(
                 carrito_id=id,
                 producto_id=id_producto,
-                cantidad=1
+                cantidad=item_cant
             )
             db.session.add(item_carrito)
         else:
-            item_carrito.cantidad += 1
-        carrito.precio_total += producto.precio
+            item_carrito.cantidad += item_cant
+        carrito.precio_total += (producto.precio * item_cant)
         db.session.commit()
     except Exception as e:
         db.session.rollback()

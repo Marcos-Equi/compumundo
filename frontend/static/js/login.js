@@ -46,6 +46,7 @@ function registerUser() {
 function loginUser() {
     const nombre = document.getElementById('username').value;
     const contraseña = document.getElementById('password').value;
+    const redirectURL = new URLSearchParams(window.location.search).get('redirectURL');
 
     fetch('/usuarios/login', {
         method: 'POST',
@@ -60,8 +61,13 @@ function loginUser() {
     .then(response => response.json())
     .then(data => {
         if (data.message === 'Inicio de sesión exitoso') {
-            localStorage.setItem('usuario', nombre); 
-            window.location.href = '/';
+            localStorage.setItem('usuario', data.usuario.nombre);
+            localStorage.setItem('usuario_id', data.usuario.id);
+            if (redirectURL) {
+                window.location.href = redirectURL;
+            } else {
+                window.location.href = '/';
+            }
         } else {
             document.getElementById('loginError').style.display = 'block';
         }

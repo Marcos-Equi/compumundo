@@ -61,9 +61,11 @@
                     <!-- Right elements -->
                     <div class="d-flex align-items-center">
                         <!-- Icon -->
-                        <a class="text-reset me-3" href="#">
+                        <button class="btn text-reset me-3 shadow-0" id="cart-button" type="button"
+                            data-mdb-ripple-color="dark"
+                            onclick="goToCart()" >
                             <i class="fas fa-shopping-cart carrito"></i>
-                        </a>
+                        </button>
                         <!-- Avatar -->
                         <a class=" d-flex align-items-center" href="#" id="navbarDropdownMenuAvatar" role="button"
                             aria-expanded="false">
@@ -182,6 +184,7 @@
             crossorigin="anonymous"></script>
         <script src="/static/js/search.js"></script>
         <script src="/static/js/featured.js"></script>
+        <script src="/static/js/cartButtons.js"></script>
 </body>
 
 </html>

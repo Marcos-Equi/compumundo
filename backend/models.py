@@ -70,6 +70,10 @@ class Carrito(db.Model):
     @staticmethod
     def buscar_por_id(id):
         return Carrito.query.get(id)
+    
+    @staticmethod
+    def buscar_por_usuario(id_usuario):
+        return Carrito.query.filter(Carrito.usuario_id == id_usuario).first()
 
 class ProdCarrito(db.Model):
     __tablename__ = 'carrito_prod'

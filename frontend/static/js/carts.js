@@ -107,14 +107,26 @@ function printCartPrice(totalPrice) {
     container.innerHTML += totalPriceRow;
 };
 
+function printCartCheckout() {
+    let container = document.getElementById('cart-checkout-container');
+    const checkoutRow = `
+    <div class="card">
+        <div class="card-body">
+        <button type="button" data-mdb-button-init data-mdb-ripple-init
+            class="btn btn-warning btn-block btn-lg">Finalizar Compra</button>
+        </div>
+    </div>
+    `
+    container.innerHTML += checkoutRow;
+}
+
 function updateTotalPrice(price) {
     let totalPriceContainer = document.getElementById('total-price');
     totalPriceContainer.innerText = price;
 };
 
 function updateItem(elementID) {
-    const params = new URLSearchParams(window.location.search);
-    let cartID = params.get('id');
+    let cartID = localStorage.getItem('carrito_id');
 
     let boton = document.getElementById(elementID);
     let productoID = boton.getAttribute('name');
@@ -126,7 +138,9 @@ function updateItem(elementID) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 'cantidad': inputQuantity }),
+        body: JSON.stringify({
+            'cantidad': inputQuantity
+        }),
     })
         .then(response => response.json())
         .then(data => {
@@ -145,8 +159,7 @@ function updateItem(elementID) {
 };
 
 function deleteCartItem(elementID) {
-    const params = new URLSearchParams(window.location.search);
-    let cartID = params.get('id');
+    let cartID = localStorage.getItem('carrito_id');
 
     let boton = document.getElementById(elementID);
     let productoID = boton.getAttribute('name');
@@ -173,8 +186,7 @@ function deleteCartItem(elementID) {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    const params = new URLSearchParams(window.location.search);
-    let cartID = params.get('id');
+    let cartID = localStorage.getItem('carrito_id');
 
     if (cartID) {
         fetch(`/api/carritos/${cartID}`, {
@@ -193,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     printAllCartItems(cart);
                 }
                 printCartPrice(cart.precio_total);
+                printCartCheckout();
             })
             .catch(error => {
                 console.error('Error al obtener carrito:', error);

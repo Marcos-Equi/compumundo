@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loginButton.href = '#';
         loginButton.addEventListener('click', () => {
             localStorage.removeItem('usuario');
+            localStorage.removeItem('usuario_id');
+            localStorage.removeItem('carrito_id');
             window.location.href = '/';
         });
     }
@@ -23,5 +25,3 @@ document.addEventListener('DOMContentLoaded', () => {
         allowTouchMove: false,
     });
 });
-
-

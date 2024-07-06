@@ -62,9 +62,11 @@
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
                     <!-- Icon -->
-                    <a class="text-reset me-3" href="#">
+                    <button class="btn text-reset me-3 shadow-0" id="cart-button" type="button"
+                        data-mdb-ripple-color="dark"
+                        onclick="goToCart()" >
                         <i class="fas fa-shopping-cart carrito"></i>
-                    </a>
+                    </button>
                     <!-- Avatar -->
                     <a class=" d-flex align-items-center" href="#" id="navbarDropdownMenuAvatar" role="button"
                         aria-expanded="false">
@@ -81,72 +83,81 @@
 
         <section class="py-5" id="datos_producto">
             <div class="container">
-                <div class="row gx-5">
-                    <aside class="col-lg-6">
-                        <div class="border rounded-4 mb-3 d-flex justify-content-center" id="imagen_cont">
-                        </div>
-                    </aside>
-                    <main class="col-lg-6">
-                        <div class="ps-lg-3">
-                            <h4 class="title text-dark" id="nombre_prod">
-                            </h4>
-                            <div class="d-flex flex-row my-3">
-                                <div class="text-warning mb-1 me-2">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <span class="ms-1">
-                                        4.5
-                                    </span>
+                <form onsubmit="addItemToCart(event)">
+                    <div class="row gx-5">
+                        <aside class="col-lg-6">
+                            <div class="border rounded-4 mb-3 d-flex justify-content-center" id="imagen_cont">
+                            </div>
+                        </aside>
+                        <main class="col-lg-6">
+                            <div class="ps-lg-3">
+                                <h4 class="title text-dark" id="nombre_prod">
+                                </h4>
+                                <div class="d-flex flex-row my-3">
+                                    <div class="text-warning mb-1 me-2">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span class="ms-1">
+                                            4.5
+                                        </span>
+                                    </div>
+                                    <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154
+                                        orders</span>
+                                    <span class="ms-2" id="aviso_stock"></span>
                                 </div>
-                                <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154
-                                    orders</span>
-                                <span class="ms-2" id="aviso_stock"></span>
-                            </div>
 
-                            <div class="mb-3">
-                                <span class="h5" id="precio_prod"></span>
-                                <span class="text-muted">/unidad</span>
-                            </div>
+                                <div class="mb-3">
+                                    <span class="h5" id="precio_prod"></span>
+                                    <span class="text-muted">/unidad</span>
+                                </div>
 
-                            <p class="descripcion_prod"></p>
+                                <p class="descripcion_prod"></p>
 
-                            <div class="row">
-                                <dt class="col-3">Tipo:</dt>
-                                <dd class="col-9" id="tipo_prod"></dd>
-                            </div>
+                                <div class="row">
+                                    <dt class="col-3">Tipo:</dt>
+                                    <dd class="col-9" id="tipo_prod"></dd>
+                                </div>
 
-                            <hr />
+                                <hr />
 
-                            <div class="row mb-4">
-                                <!-- col.// -->
-                                <div class="col-md-4 col-6 mb-3">
-                                    <label class="mb-2 d-block">Cantidad</label>
-                                    <div class="input-group mb-3" style="width: 170px;">
-                                        <button class="btn btn-white border border-secondary px-3 boton_stock"
-                                            type="button" id="button-addon1" data-mdb-ripple-color="dark"
-                                            onclick="sumRestCant(-1)" disabled>
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                        <input type="text" class="form-control text-center border border-secondary"
-                                            placeholder="1" aria-describedby="button-addon1" id="stock_cont" readonly />
-                                        <button class="btn btn-white border border-secondary px-3 boton_stock"
-                                            type="button" id="button-addon2" data-mdb-ripple-color="dark"
-                                            onclick="sumRestCant(1)">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
+                                <div class="row mb-4">
+                                    <!-- col.// -->
+                                    <div class="col-md-4 col-6 mb-3">
+                                        <label class="mb-2 d-block">Cantidad</label>
+                                        <div class="input-group mb-3" style="width: 170px;">
+                                            <button class="btn btn-white border border-secondary px-3 boton_stock"
+                                                type="button" id="button-addon1" data-mdb-ripple-color="dark"
+                                                onclick="sumRestCant(-1)" disabled>
+                                                <i class="fas fa-minus"></i>
+                                            </button>
+                                            <input type="text" class="form-control text-center border border-secondary"
+                                                placeholder="1" aria-describedby="button-addon1" id="stock_cont" readonly />
+                                            <button class="btn btn-white border border-secondary px-3 boton_stock"
+                                                type="button" id="button-addon2" data-mdb-ripple-color="dark"
+                                                onclick="sumRestCant(1)">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+                                <button class="btn btn-success shadow-0" type="button" data-mdb-ripple-color="dark"
+                                    onclick="" >
+                                    Comprar Ahora
+                                </button>
+                                <button class="btn btn-primary mt-auto" id="agregar_car" type="submit"
+                                    data-mdb-ripple-color="dark" >
+                                    <i class="me-1 fa fa-shopping-basket"></i>
+                                    Agregar al carrito
+                                </button>
+                                <input type="hidden" id="item_id" name="item_id" value="" />
+                                <input type="hidden" id="quantity" name="quantity" value="1" />
                             </div>
-                            <a href="#" class="btn btn-success shadow-0"> Comprar ahora </a>
-                            <a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i>
-                                Agregar
-                                al carrito </a>
-                        </div>
-                    </main>
-                </div>
+                        </main>
+                    </div>
+                </form>
             </div>
         </section>
         <!-- content -->
@@ -282,6 +293,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="../static/js/detallesProd.js"></script>
+    <script src="../static/js/cartButtons.js"></script>
 </body>
 
 </html>

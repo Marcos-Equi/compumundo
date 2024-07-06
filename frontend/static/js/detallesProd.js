@@ -37,6 +37,9 @@ function imprimirDatos(data) {
         stock.innerHTML = 'Sin stock'
         stock.className += ' text-danger'
     }
+
+    let itemId = document.getElementById('item_id');
+    itemId.value = `${data.id}`;
 }
 
 async function imprimirSimilares(tipo) {
@@ -107,5 +110,8 @@ function sumRestCant(op) {
         botonesStock[1].disabled = false
     }
     stockCont.placeholder = cant + op
+
+    let quantity = document.getElementById('quantity');
+    quantity.value = `${stockCont.placeholder}`;
 }
 cargarProd()
