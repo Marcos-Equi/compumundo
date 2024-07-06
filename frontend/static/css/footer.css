@@ -53,3 +53,9 @@
 .footer-menu__item a:hover {
     color: rgb(255, 255, 255);
 }
+
+.footer-menu__item a:hover i {
+    color: rgb(34, 255, 0);
+    text-shadow: #8cff99 1px 0px 1px;
+    transition: 0.1s;
+}

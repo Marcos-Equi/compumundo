@@ -1,0 +1,49 @@
+#acordeon_faq {
+    margin-top: 80px;
+    width: 60%;
+    margin-inline: auto;
+    background-color: transparent;
+}
+
+.titulo_faq {
+    margin-inline: auto;
+    margin-top: 35px;
+    margin-bottom: 40px;
+    border-bottom: #888888a8 1px solid;
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+.accordion-item {
+    background-color: transparent;
+}
+
+.accordion-button {
+    background-color: white !important;
+    box-shadow: 2px 2px 5px #888888 !important;
+}
+
+.accordion-button.collapsed {
+    background-color: white !important;
+    box-shadow: none !important;
+}
+
+.accordion-collapse {
+    background-color: white;
+}
+
+.collapse.show {
+    margin-bottom: 10px !important;
+    transition: 0.1s;
+}
+
+.accordion-body span {
+    font-size: 20px;
+    color: #207dff;
+}
+
+.accordion-body p {
+    margin-top: 15px;
+    margin-left: 10px;
+}
