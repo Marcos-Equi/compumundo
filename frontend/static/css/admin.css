@@ -7,13 +7,14 @@ body {
 }
 
 .container {
+    margin-top: 100px;
     display: flex;
     width: 100%;
+    height: 100%;
 }
 
 .sidebar {
-    background-color: #f4f4f4;
-    width: 200px;
+    width: 16%;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -21,15 +22,14 @@ body {
 }
 
 .sidebar-btn {
-    background-color: transparent;  
-    color: black;  
+    background-color: transparent;
+    color: black;
     border: none;
-    padding: 20px;  
-    margin: 10px 0; 
+    padding: 20px;
     width: 100%;
     text-align: left;
     cursor: pointer;
-    font-size: 16px; 
+    font-size: 16px;
 }
 
 .sidebar-btn i {
@@ -37,8 +37,9 @@ body {
 }
 
 .sidebar-btn:hover {
-    background-color: #ddd;  
-    color: black;  
+    background-color: #ddd;
+    transition: 0.2s;
+    color: black;
 }
 
 .content {
@@ -64,10 +65,12 @@ body {
 .section {
     flex: 1;
     border: 1px solid #ddd;
+    border-radius: 2px;
+    box-shadow: #adadad 1px 2px 4px;
     padding: 20px;
     background-color: #f9f9f9;
     overflow-y: auto;
-    margin-bottom: 40px; 
+    margin-bottom: 40px;
 }
 
 .form-row {
@@ -86,18 +89,18 @@ form label {
     margin-bottom: 5px;
 }
 
-form input[type="text"],
+.content form input[type="text"],
 form input[type="password"] {
     padding: 5px;
     width: 100%;
     box-sizing: border-box;
     border: none;
-    border-bottom: 2px solid #000; 
+    border-bottom: 1px solid #000;
     background: transparent;
     outline: none;
 }
 
-form input[type="text"]::placeholder,
+.content form input[type="text"]::placeholder,
 form input[type="password"]::placeholder {
     color: #999;
 }
@@ -106,18 +109,22 @@ form input[type="submit"] {
     background-color: #007bff;
     color: white;
     border: none;
+    border-radius: 4px;
     padding: 10px 20px;
     cursor: pointer;
+    transition: 0.1s;
+    box-shadow: #adadad 0px 2px 2px;
 }
 
 form input[type="submit"]:hover {
     background-color: #0056b3;
+    transition: 0.1s;
 }
 
 #password-change-message {
     display: block;
     margin-top: 10px;
-    font-size: 14px;  
+    font-size: 14px;
 }
 
 #password-change-message.success {
