@@ -22,6 +22,7 @@
 .accordion-button {
     background-color: white !important;
     box-shadow: 2px 2px 5px #888888 !important;
+    transition: 0.5s;
 }
 
 .accordion-button.collapsed {

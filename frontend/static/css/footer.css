@@ -59,3 +59,7 @@
     text-shadow: #8cff99 1px 0px 1px;
     transition: 0.1s;
 }
+
+.footer-menu__map {
+    margin-left: 20px !important;
+}
