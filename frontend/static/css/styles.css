@@ -1,9 +1,17 @@
 body {
     height: 100vh;
     font-family: 'Roboto', sans-serif !important;
+    overflow-x: hidden;
 }
+
 .carrito {
     color: #ddd;
+    transition: 0.1s;
+}
+
+.carrito:hover {
+    color: white;
+    transition: 0.1s;
 }
 
 .carousel {
@@ -75,13 +83,15 @@ body {
     box-shadow: rgba(140, 140, 140, 0.695) 1px 0px 3px;
 }
 
-.fa-arrow-left, .fa-arrow-right {
+.fa-arrow-left,
+.fa-arrow-right {
     position: relative;
     font-size: 20px;
     z-index: 10;
 }
 
-.fa-arrow-left:hover, .fa-arrow-right:hover {
+.fa-arrow-left:hover,
+.fa-arrow-right:hover {
     box-shadow: #9d9d9d 1px 1px 8px;
     transition: 0.2s;
 }
@@ -145,7 +155,8 @@ body {
     margin: 0 !important;
     color: rgb(32, 125, 255);
 }
-#titulo_header:hover i{
+
+#titulo_header:hover i {
     color: rgb(34, 255, 0);
     text-shadow: #8cff99 1px 0px 3px;
     transition: 0.1s;
@@ -157,4 +168,3 @@ body {
     padding-block: 15px !important;
     top: 0;
 }
-

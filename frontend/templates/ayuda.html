@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/static/css/ayuda.css">
 </head>
 
 <body>
@@ -63,42 +64,126 @@
                     </div>
                 </div>
             </header>
-            <div id="productos-body">
-                <div class="d-flex">
-                    <div class="border-end vh-100 productos-body" id="sidebar-wrapper">
-                        <div class="sidebar-heading p-3">
-                            <p>Categorías</p>
-                        </div>
-                        <div class="list-group list-group-flush">
-                            <a href="#" class="list-group-item list-group-item-action"
-                                onclick="filtrarProductos('tarjeta grafica')">Placas de video</a>
-                            <a href="#" class="list-group-item list-group-item-action "
-                                onclick="filtrarProductos('procesador')">Procesadores</a>
-                            <a href="#" class="list-group-item list-group-item-action "
-                                onclick="filtrarProductos('memoria ram')">Memoria ram</a>
-                            <a href="#" class="list-group-item list-group-item-action "
-                                onclick="filtrarProductos('monitor')">Monitores</a>
-                            <a href="#" class="list-group-item list-group-item-action "
-                                onclick="filtrarProductos('perifericos')">Perifericos</a>
-                            <a href="#" class="list-group-item list-group-item-action "
-                                onclick="filtrarProductos('almacenamiento')">Almacenamiento</a>
-                            <a href="#" class="list-group-item list-group-item-action "
-                                onclick="filtrarProductos('fuente de poder')">Fuente de poder</a>
-                            <a href="#" class="list-group-item list-group-item-action "
-                                onclick="filtrarProductos('gabinete')">Gabinete</a>
-                            <a href="#" class="list-group-item list-group-item-action "
-                                onclick="filtrarProductos('placa madre')">Placa madre</a>
+            <div class="accordion" id="acordeon_faq">
+                <p class="titulo_faq">Preguntas frecuentes</p>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#preguntaUno" aria-expanded="true" aria-controls="preguntaUno">
+                            Compras
+                        </button>
+                    </h2>
+                    <div id="preguntaUno" class="accordion-collapse collapse show" data-bs-parent="#acordeon_faq">
+                        <div class="accordion-body">
+                            <span>¿Cómo se compra?</span>
+                            <p>
+                                Si estás interesado en productos individuales y separados, podrás escogerlos uno por uno
+                                y
+                                hacer click sobre “Añadir al carrito” en el botón celeste que figura al lado de las
+                                imágenes
+                                demostrativas de cada producto. Al finalizar, hacer click sobre el carrito, que sería el
+                                botón celeste en el extremo superior derecho, y seleccionar “Finalizar compra”.
+                            </p>
                         </div>
                     </div>
-                    <div id="content-wrapper" class="flex-grow-1 productos-body">
-                        <div class="product-container">
-                            <div class="row">
-                            </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#preguntaDos" aria-expanded="false" aria-controls="preguntaDos">
+                            Políticas y garantía
+                        </button>
+                    </h2>
+                    <div id="preguntaDos" class="accordion-collapse collapse" data-bs-parent="#acordeon_faq">
+                        <div class="accordion-body">
+                            <span>¿Los componentes tienen garantía?</span>
+                            <p>
+                                Todos los productos cuentan con la Garantía Oficial del Fabricante, los tiempos están
+                                detallados en nuestra web en cada producto.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#preguntaTres" aria-expanded="false" aria-controls="preguntaTres">
+                            Financiación
+                        </button>
+                    </h2>
+                    <div id="preguntaTres" class="accordion-collapse collapse" data-bs-parent="#acordeon_faq">
+                        <div class="accordion-body">
+                            <span>¿Qué métodos de financiación tienen?</span>
+                            <p>
+                                Podés utilizar el método de financiación a través de tarjetas Visa y Mastercard, con las
+                                cuales podés acceder a 3 y 12 cuotas sin interés si empleas una tarjeta de crédito
+                                brindada
+                                por una entidad bancaria.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#preguntaCuatro" aria-expanded="false" aria-controls="preguntaCuatro">
+                            Envíos
+                        </button>
+                    </h2>
+                    <div id="preguntaCuatro" class="accordion-collapse collapse" data-bs-parent="#acordeon_faq">
+                        <div class="accordion-body">
+                            <span>¿Cómo gestiono mi envío?</span>
+                            <p>
+                                En primer lugar, para conocer el costo del envío, una vez al agregues al carrito tu
+                                compra,
+                                solo debes colocar tu código postal en el recuadro correspondiente, seleccionar la
+                                mensajería de tu preferencia y elegir si deseas el retiro en alguna sucursal o la
+                                entrega a
+                                domicilio. Actualmente realizamos envíos a todo el país través de Oca y Andreani. Tené
+                                en
+                                cuenta que, para calcular el costo del envío, se toman en consideración tanto las
+                                dimensiones y peso del paquete como la distancia de la localidad de entrega.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#preguntaCinco" aria-expanded="false" aria-controls="preguntaCinco">
+                            Devolución
+                        </button>
+                    </h2>
+                    <div id="preguntaCinco" class="accordion-collapse collapse" data-bs-parent="#acordeon_faq">
+                        <div class="accordion-body">
+                            <span>¿Cómo funcionan las devoluciones? ¿Me devuelven el dinero?</span>
+                            <p>
+                                En caso de que no se tenga stock del producto llevado a garantía por el cliente y no
+                                desee
+                                otro a cambio, se podrá hacer la devolución que corresponda.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#preguntaSeis" aria-expanded="false" aria-controls="preguntaSeis">
+                            Reembolso
+                        </button>
+                    </h2>
+                    <div id="preguntaSeis" class="accordion-collapse collapse" data-bs-parent="#acordeon_faq">
+                        <div class="accordion-body">
+                            <span>¿Es posible pedir un reembolso?</span>
+                            <p>
+                                No realizamos reembolsos.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <footer class="footer">
             <div class="marcas">
                 <div class="swiper">
@@ -154,7 +239,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="../static/js/products.js"></script>
+    <script src="../static/js/search.js"></script>
 </body>
 
 </html>
