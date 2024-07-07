@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models import Carrito, ProdCarrito, Producto, db
+from models import Carrito, ProdCarrito, Producto, IniciarSesion, db
 
 carritos = Blueprint('carritos', __name__, url_prefix='/carritos')
 
@@ -13,7 +13,7 @@ def get_cart(id):
 @carritos.route('/', methods=['POST'])
 def create_cart():
     data = request.get_json()
-    id_usuario = int(data['id_usuario'])
+    #id_usuario = int(data['id_usuario'])
     carrito = Carrito.buscar_por_usuario(data['id_usuario'])
     try:
         if not carrito:
@@ -33,6 +33,22 @@ def delete_cart(id):
     db.session.delete(carrito)
     db.session.commit()
     return jsonify({'exito': True}), 200
+
+@carritos.route('/<int:id>/checkout', methods=['POST'])
+def checkout_cart(id):
+    data = request.get_json()
+    carrito = Carrito.buscar_por_usuario(data['id_usuario'])
+    lista_items = ProdCarrito.buscar_por_carrito(id)
+    try:
+        for item in lista_items:
+            producto = Producto.buscar_por_id(item.producto_id)
+            producto.stock -= item.cantidad
+        carrito.fin_compra = True
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+    return jsonify({'message': 'Muchas gracias por su compra!'}), 200
 
 @carritos.route('/<int:id>/producto/<int:id_producto>', methods=['POST'])
 def add_item(id, id_producto):

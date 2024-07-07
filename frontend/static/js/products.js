@@ -22,11 +22,11 @@ function printProducts(products) {
                             </div>
                             <p class="card-text">${prod.descripcion}</p>
                             <span class="precio_prod">$ ${precio}</span>
-                            <a href="#" class="btn btn-primary mt-auto" id="agregar_car"
+                            <button class="btn btn-primary mt-auto" type="button" id="agregar_car"
                                 onclick="addItemToCart(${prod.id}, 1)">
                                 <i class="me-1 fa fa-shopping-basket"></i>
                                 Agregar al carrito
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -4,8 +4,13 @@ function printEmptyCart() {
     <div class="card rounded-3 mb-4 text-bg-light"">
         <div class="card-body p-4">
             <div class="row d-flex justify-content-between align-items-center">
-                <div class="col-md-12 col-lg-12 col-xl-12">
+                <div class="col-md-6 col-lg-6 col-xl-6">
                     <h5 class="mb-0"> El carrito no tiene items. </h5>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                    <a href="/producto" class="btn btn-primary btn-block btn-lg me-3">
+                        Agregar productos
+                    </a>
                 </div>
             </div>
         </div>
@@ -112,9 +117,10 @@ function printCartCheckout() {
     const checkoutRow = `
     <div class="card">
         <div class="card-body">
-        <button type="button" data-mdb-button-init data-mdb-ripple-init
-            class="btn btn-warning btn-block btn-lg">Finalizar Compra</button>
-        </div>
+        <a href="#" class="btn btn-warning btn-block btn-lg text-reset me-3"
+            id="checkout-button" onclick="checkOut()">
+            Finalizar Compra
+        </a>
     </div>
     `
     container.innerHTML += checkoutRow;
@@ -177,8 +183,11 @@ function deleteCartItem(elementID) {
             }
             if (data.precio_total === '0.00') {
                 printEmptyCart();
+                document.getElementById('cart-price-container').remove();
+                document.getElementById('cart-checkout-container').remove();
+            } else {
+                updateTotalPrice(data.precio_total);
             }
-            updateTotalPrice(data.precio_total);
         })
         .catch(error => {
             console.error('Error al borrar item:', error);
@@ -203,9 +212,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     printEmptyCart();
                 } else {
                     printAllCartItems(cart);
+                    printCartPrice(cart.precio_total);
+                    printCartCheckout();
                 }
-                printCartPrice(cart.precio_total);
-                printCartCheckout();
             })
             .catch(error => {
                 console.error('Error al obtener carrito:', error);

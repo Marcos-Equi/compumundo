@@ -27,9 +27,9 @@ def product():
         return render_template('detallesProd.html')
     return render_template('products.html')
 
-@app.route('/ayuda')
-def ayuda():
-    return render_template('ayuda.html')
+@app.route('/carrito')
+def cart():
+    return render_template('carts.html')
 
 @app.route('/ayuda')
 def ayuda():
@@ -42,10 +42,6 @@ def contacto():
 @app.route('/iniciar_sesion')
 def iniciar_sesion():
     return render_template('login.html')
-
-@app.route('/carrito')
-def cart():
-    return render_template('carts.html')
 
 @app.route('/img/<path:filename>')
 def send_img(filename):

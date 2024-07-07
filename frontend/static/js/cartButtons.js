@@ -27,7 +27,7 @@ async function addItemToCart(productId, quantity) {
                     console.error('Error al agregar item:', error);
                 });
         }
-        window.location.href = `/carrito`;
+        window.location.href = '/carrito';
     } else {
         window.location.href = '/iniciar_sesion';
     }
@@ -39,7 +39,6 @@ async function goToCart() {
     
     if (userId) {
         if (!cartId) {
-            console.log('entra aca');
             await fetch(`/api/carritos/`, {
                 method: 'POST',
                 headers: {
@@ -61,10 +60,38 @@ async function goToCart() {
                     console.error('Error al obtener item:', error);
                 });
         }
-        window.location.href = `/carrito`;
+        window.location.href = '/carrito';
     } else {
         window.location.href = '/iniciar_sesion';
     }
 };
 
+async function checkOut() {
+    const userId = localStorage.getItem('usuario_id');
+    const cartId = localStorage.getItem('carrito_id');
+    
+    await fetch(`/api/carritos/${cartId}/checkout`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'id_usuario': userId
+        }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error al obtener carrito:', data.error);
+                return;
+            }
+            if (data.message === 'Muchas gracias por su compra!') {
+                localStorage.removeItem('carrito_id', cartId)
+            }
+        })
+        .catch(error => {
+            console.error('Error al obtener item:', error);
+        });
+    window.location.href = '/';
+};
 

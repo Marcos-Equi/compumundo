@@ -39,8 +39,11 @@ function imprimirDatos(data) {
     }
     
     let botonAgregarCarrito = document.getElementById('agregar_car');
-    botonAgregarCarrito.setAttribute('onclick', `addItemToCart(${data.id}, 1)`);
+    botonAgregarCarrito.setAttribute('onclick', `addItemToCart(${data.id}, ${stockCont.placeholder})`);
     botonAgregarCarrito.prodId = data.id;
+    if (data.stock < 1) {
+        botonAgregarCarrito.disabled = true
+    }
 }
 
 async function imprimirSimilares(tipo) {

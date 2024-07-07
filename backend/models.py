@@ -54,6 +54,7 @@ class Carrito(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('iniciar_sesion.id'))
     precio_total = db.Column(db.Numeric(10, 2), default=0.00)
+    fin_compra = db.Column(db.Boolean, default=False, nullable=False)
     fecha_creacion = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def serialize(self):
@@ -73,7 +74,7 @@ class Carrito(db.Model):
     
     @staticmethod
     def buscar_por_usuario(id_usuario):
-        return Carrito.query.filter(Carrito.usuario_id == id_usuario).first()
+        return Carrito.query.filter(Carrito.usuario_id == id_usuario, Carrito.fin_compra == False).first()
 
 class ProdCarrito(db.Model):
     __tablename__ = 'carrito_prod'
@@ -113,7 +114,6 @@ class IniciarSesion(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     apellido = db.Column(db.String(100), nullable=False)
     contraseña = db.Column(db.String(255), nullable=False)
-    lista_compra = db.Column(db.Text, nullable=True)
     
     def __repr__(self):
         return f'<IniciarSesion {self.nombre} {self.apellido}>'
@@ -123,6 +123,5 @@ class IniciarSesion(db.Model):
             'id': self.id,
             'nombre': self.nombre,
             'apellido': self.apellido,
-            'contraseña': self.contraseña,
-            'lista_compra': self.lista_compra
+            'contraseña': self.contraseña
         }
