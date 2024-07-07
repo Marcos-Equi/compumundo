@@ -28,7 +28,7 @@
                         </div>
                         <button type="button" class="btn btn-primary" onclick="loginUser()">Iniciar Sesión</button>
                     </form>
-                    <p id="loginError" class="text-danger mt-3" style="display: none;">Nombre o contraseña incorrectos</p>
+                    <button id="loginErrorButton" class="btn btn-danger mt-3" style="display: none;">Nombre o contraseña incorrectos</button>
                     <p id="noAccountText" class="mt-3">¿No tienes una cuenta?</p>
                     <button id="toggleFormButton" class="btn btn-secondary mt-3">Registrarse</button>
                 </div>
@@ -48,7 +48,48 @@
                             <label for="contraseña" class="form-label">Contraseña</label>
                             <input type="password" class="form-control" id="contraseña" name="contraseña" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="preguntaSeguridad" class="form-label">Pregunta de Seguridad</label>
+                            <select class="form-select" id="preguntaSeguridad" name="preguntaSeguridad" required>
+                                <option value="" selected disabled>Selecciona una pregunta de seguridad</option>
+                                <option value="1">¿Cuál es el nombre de tu primer mascota?</option>
+                                <option value="2">¿En qué ciudad naciste?</option>
+                                <option value="3">¿Cuál es tu película favorita?</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="respuestaSeguridad" class="form-label">Respuesta de Seguridad</label>
+                            <input type="text" class="form-control" id="respuestaSeguridad" name="respuestaSeguridad" required>
+                        </div>
                         <button type="button" class="btn btn-primary" onclick="registerUser()">Registrarse</button>
+                    </form>
+                </div>
+
+                <div id="passwordRecoveryForm" class="form-container" style="display: none;">
+                    <h5 class="card-title">Recuperar Contraseña</h5>
+                    <form id="passwordRecoveryFormElement">
+                        <div class="mb-3">
+                            <label for="usernameRecovery" class="form-label">Nombre de Usuario</label>
+                            <input type="text" class="form-control" id="usernameRecovery" name="usernameRecovery" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="preguntaSeguridadRecovery" class="form-label">Pregunta de Seguridad</label>
+                            <select class="form-select" id="preguntaSeguridadRecovery" name="preguntaSeguridadRecovery" required>
+                                <option value="" selected disabled>Selecciona una pregunta de seguridad</option>
+                                <option value="1">¿Cuál es el nombre de tu primer mascota?</option>
+                                <option value="2">¿En qué ciudad naciste?</option>
+                                <option value="3">¿Cuál es tu película favorita?</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="respuestaSeguridadRecovery" class="form-label">Respuesta de Seguridad</label>
+                            <input type="text" class="form-control" id="respuestaSeguridadRecovery" name="respuestaSeguridadRecovery" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">Nueva Contraseña</label>
+                            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="recoverPassword()">Cambiar Contraseña</button>
                     </form>
                 </div>
             </div>

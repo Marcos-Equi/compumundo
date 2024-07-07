@@ -10,7 +10,7 @@ function printProducts(products) {
             <div class="col-12 product-card">
                 <div class="card">
                     <div class="row g-0 data_prod">
-                        <div class="col-md-4">
+                        <div class="col-md-4 img_cont">
                             <a href='/producto?id=${prod.id}'>
                                 <img src=${prod.imagen} class="img-fluid rounded-start card-img"
                                     alt=${prod.imagen}>
@@ -20,13 +20,11 @@ function printProducts(products) {
                             <div class="card-title">
                                 <a href='/producto?id=${prod.id}' class="titulo_prod">${prod.nombre}</a>
                             </div>
-                            <p class="card-text">${prod.descripcion}</p>
                             <span class="precio_prod">$ ${precio}</span>
-                            <button class="btn btn-primary mt-auto" type="button" id="agregar_car"
-                                onclick="addItemToCart(${prod.id}, 1)">
-                                <i class="me-1 fa fa-shopping-basket"></i>
-                                Agregar al carrito
-                            </button>
+                            ${prod.stock > 0 ? 
+                                `<button href="#" class="btn btn-primary mt-auto" id="agregar_car" onclick="addItemToCart(${prod.id}, 1)">Agregar al carrito</button>`
+                                : `<button href="#" class="btn btn-primary mt-auto" id="agregar_car"  disabled>Sin stock</button>`
+                            }
                         </div>
                     </div>
                 </div>

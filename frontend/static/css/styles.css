@@ -7,7 +7,33 @@ body {
 .carrito {
     color: #ddd;
     transition: 0.1s;
+    font-size: 1.1rem;
 }
+
+#search-button {
+    border-color: #ddd;
+}
+
+#avatar-button,
+#login-button {
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #ddd;
+    transition: 0.1s;
+    margin-inline: 10px;
+}
+
+#avatar-button i,
+#login-button i {
+    margin-inline: 5px;
+}
+
+#avatar-button:hover,
+#login-button:hover {
+    color: white;
+    transition: 0.1s;
+}
+
 
 .carrito:hover {
     color: white;
@@ -37,6 +63,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    height: max-content;
     background-color: #ececec;
 }
 

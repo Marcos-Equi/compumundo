@@ -47,6 +47,10 @@ def iniciar_sesion():
 def send_img(filename):
     return send_from_directory('../frontend/img', filename)
 
+@app.route('/account_management')
+def account_management():
+    return render_template('account_management.html')
+
 app.register_blueprint(api)
 app.register_blueprint(user_router, url_prefix='/usuarios')
 
