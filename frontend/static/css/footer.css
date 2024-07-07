@@ -13,19 +13,17 @@
 }
 
 .footer .marca {
-    display: flex;
-    justify-items: end;
-    justify-content: center;
     padding-top: 2%;
+    margin-block: auto;
 }
 
 .footer .marca img {
-    max-height: 100px;
-    width: auto;
+    max-width: 150px;
+    height: auto;
 }
 
 .footer-menu {
-    margin-top: 50px;
+    margin-top: 30px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -54,4 +52,10 @@
 
 .footer-menu__item a:hover {
     color: rgb(255, 255, 255);
+}
+
+.footer-menu__item a:hover i {
+    color: rgb(34, 255, 0);
+    text-shadow: #8cff99 1px 0px 1px;
+    transition: 0.1s;
 }

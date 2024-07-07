@@ -37,9 +37,10 @@ function imprimirDatos(data) {
         stock.innerHTML = 'Sin stock'
         stock.className += ' text-danger'
     }
-
-    let itemId = document.getElementById('item_id');
-    itemId.value = `${data.id}`;
+    
+    let botonAgregarCarrito = document.getElementById('agregar_car');
+    botonAgregarCarrito.setAttribute('onclick', `addItemToCart(${data.id}, 1)`);
+    botonAgregarCarrito.prodId = data.id;
 }
 
 async function imprimirSimilares(tipo) {
@@ -111,7 +112,8 @@ function sumRestCant(op) {
     }
     stockCont.placeholder = cant + op
 
-    let quantity = document.getElementById('quantity');
-    quantity.value = `${stockCont.placeholder}`;
+    let botonAgregarCarrito = document.getElementById('agregar_car');
+    let id = botonAgregarCarrito.prodId;
+    botonAgregarCarrito.setAttribute('onclick', `addItemToCart(${id}, ${stockCont.placeholder})`);
 }
 cargarProd()

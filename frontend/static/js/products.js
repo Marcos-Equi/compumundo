@@ -1,4 +1,3 @@
-
 function printProducts(products) {
     let container = document.querySelector('.product-container');
     container.innerHTML = '';
@@ -10,29 +9,26 @@ function printProducts(products) {
         const productCard = `
             <div class="col-12 product-card">
                 <div class="card">
-                    <form onsubmit="addItemToCart(event)">
-                        <div class="row g-0 data_prod">
-                            <div class="col-md-4">
+                    <div class="row g-0 data_prod">
+                        <div class="col-md-4">
+                            <a href='/producto?id=${prod.id}'>
                                 <img src=${prod.imagen} class="img-fluid rounded-start card-img"
                                     alt=${prod.imagen}>
-                            </div>
-                            
-                            <div class="col-md-8 card-body d-flex flex-column">
-                                <div class="card-title">
-                                    <a href='/producto?id=${prod.id}' class="titulo_prod">${prod.nombre}</a>
-                                </div>
-                                <p class="card-text">${prod.descripcion}</p>
-                                <span class="precio_prod">$ ${precio}</span>                                
-                                
-                                <button class="btn btn-primary mt-auto" id="agregar_car" type="submit"
-                                    data-mdb-ripple-color="dark" >
-                                    Agregar al carrito
-                                </button>
-                                <input type="hidden" id="item_id" name="item_id" value="${prod.id}" />
-                                <input type="hidden" id="quantity" name="quantity" value="1" />
-                            </div>
+                            </a>
                         </div>
-                    </form>
+                        <div class="col-md-8 card-body d-flex flex-column">
+                            <div class="card-title">
+                                <a href='/producto?id=${prod.id}' class="titulo_prod">${prod.nombre}</a>
+                            </div>
+                            <p class="card-text">${prod.descripcion}</p>
+                            <span class="precio_prod">$ ${precio}</span>
+                            <a href="#" class="btn btn-primary mt-auto" id="agregar_car"
+                                onclick="addItemToCart(${prod.id}, 1)">
+                                <i class="me-1 fa fa-shopping-basket"></i>
+                                Agregar al carrito
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         `

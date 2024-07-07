@@ -27,6 +27,10 @@ def product():
         return render_template('detallesProd.html')
     return render_template('products.html')
 
+@app.route('/ayuda')
+def ayuda():
+    return render_template('ayuda.html')
+
 @app.route('/iniciar_sesion')
 def iniciar_sesion():
     return render_template('login.html')
@@ -46,5 +50,5 @@ if __name__ == '__main__':
     print('Starting server...')
     with app.app_context():
         db.create_all()
-    app.run(host='0.0.0.0', debug=True, port=port)
+    app.run(host = '0.0.0.0', debug=True, port=port)
     print('Started...')

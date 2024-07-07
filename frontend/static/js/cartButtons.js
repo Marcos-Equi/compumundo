@@ -1,9 +1,4 @@
-async function addItemToCart(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const productId = formData.get("item_id");
-    const quantity = formData.get('quantity');
-
+async function addItemToCart(productId, quantity) {
     const userId = localStorage.getItem('usuario_id');
     const cartId = localStorage.getItem('carrito_id');
 
