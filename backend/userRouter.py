@@ -4,6 +4,28 @@ from models import db, IniciarSesion
 
 user_router = Blueprint('usuarios', __name__)
 
+
+@user_router.route('/<nombre_usuario>/change-password', methods=['PUT'])
+def change_password(nombre_usuario):
+    data = request.json
+    old_password = data.get('oldPassword')
+    new_password = data.get('newPassword')
+
+    if old_password and new_password:
+        usuario = IniciarSesion.query.filter_by(nombre=nombre_usuario).first()
+        if usuario:
+            if usuario.contraseña == old_password:
+                usuario.contraseña = new_password
+                db.session.commit()
+                return jsonify({'message': 'Contraseña actualizada correctamente'}), 200
+            else:
+                return jsonify({'error': 'La contraseña actual es incorrecta'}), 401
+        else:
+            return jsonify({'error': 'Usuario no encontrado'}), 404
+    else:
+        return jsonify({'error': 'Faltan datos obligatorios'}), 400
+
+
 @user_router.route('/usuario/<nombre>', methods=['GET'])
 def obtener_usuario(nombre):
     usuario = IniciarSesion.query.filter_by(nombre=nombre).first()

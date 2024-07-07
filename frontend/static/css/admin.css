@@ -113,3 +113,17 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+#password-change-message {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;  
+}
+
+#password-change-message.success {
+    color: green;
+}
+
+#password-change-message.error {
+    color: red;
+}
