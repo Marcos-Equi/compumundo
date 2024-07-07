@@ -4,6 +4,19 @@ from models import db, IniciarSesion
 
 user_router = Blueprint('usuarios', __name__)
 
+@user_router.route('/usuario/<nombre>', methods=['GET'])
+def obtener_usuario(nombre):
+    usuario = IniciarSesion.query.filter_by(nombre=nombre).first()
+    if usuario:
+        return jsonify({
+            'nombre': usuario.nombre,
+            'apellido': usuario.apellido
+        }), 200
+    else:
+        return jsonify({'error': 'Usuario no encontrado'}), 404
+    
+
+
 @user_router.route('/register', methods=['POST'])
 def register():
     data = request.json
@@ -18,6 +31,8 @@ def register():
         return jsonify({'message': 'Usuario registrado correctamente'}), 201
     else:
         return jsonify({'error': 'Faltan datos obligatorios'}), 400
+    
+
 
 @user_router.route('/login', methods=['POST'])
 def login():
@@ -55,3 +70,5 @@ def recover_password(nombre_usuario):
             return jsonify({'error': 'Usuario no encontrado'}), 404
     else:
         return jsonify({'error': 'Faltan datos obligatorios'}), 400
+
+
