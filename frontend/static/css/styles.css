@@ -1,6 +1,7 @@
 body {
     height: 100vh;
     font-family: 'Roboto', sans-serif !important;
+    overflow-x: hidden;
 }
 
 .carrito {
