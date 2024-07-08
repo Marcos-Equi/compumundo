@@ -45,14 +45,20 @@ def register():
     nombre = data.get('nombre')
     apellido = data.get('apellido')
     contraseña = data.get('contraseña')
-    respuesta = data.get('respuesta')  
-    if nombre and apellido and contraseña and respuesta:
-        nuevo_usuario = IniciarSesion(nombre=nombre, apellido=apellido, contraseña=contraseña, respuesta=respuesta)
-        db.session.add(nuevo_usuario)
-        db.session.commit()
-        return jsonify({'message': 'Usuario registrado correctamente'}), 201
-    else:
+    respuesta = data.get('respuesta')
+    
+    if not nombre or not apellido or not contraseña or not respuesta:
         return jsonify({'error': 'Faltan datos obligatorios'}), 400
+
+    usuario_existente = IniciarSesion.query.filter_by(nombre=nombre).first()
+    if usuario_existente:
+        return jsonify({'error': 'El nombre de usuario ya está registrado'}), 409
+
+    nuevo_usuario = IniciarSesion(nombre=nombre, apellido=apellido, contraseña=contraseña, respuesta=respuesta)
+    db.session.add(nuevo_usuario)
+    db.session.commit()
+    
+    return jsonify({'message': 'Usuario registrado correctamente'}), 201
     
 
 
