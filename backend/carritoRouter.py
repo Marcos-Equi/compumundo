@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models import Carrito, ProdCarrito, Producto, IniciarSesion, db
+from models import Carrito, ProdCarrito, Producto, db
 
 carritos = Blueprint('carritos', __name__, url_prefix='/carritos')
 
@@ -10,11 +10,17 @@ def get_cart(id):
         return jsonify({'error': 'Carrito no existente'}), 404    
     return jsonify({'carrito': carrito.serialize()}), 200
 
+@carritos.route('/usuario/<int:id>', methods=['GET'])
+def get_cartsByUser(id):
+    lista_carritos = Carrito.buscar_por_usuario(id, True)
+    if not lista_carritos:
+        return jsonify({'error': 'Carritos no existentes'}), 404    
+    return jsonify({'compras': [carrito.serialize() for carrito in lista_carritos]}), 200
+
 @carritos.route('/', methods=['POST'])
 def create_cart():
     data = request.get_json()
-    #id_usuario = int(data['id_usuario'])
-    carrito = Carrito.buscar_por_usuario(data['id_usuario'])
+    carrito = Carrito.buscar_por_usuario(data['id_usuario'], False)
     try:
         if not carrito:
             carrito = Carrito(usuario_id=data['id_usuario'])

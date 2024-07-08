@@ -73,8 +73,8 @@ class Carrito(db.Model):
         return Carrito.query.get(id)
     
     @staticmethod
-    def buscar_por_usuario(id_usuario):
-        return Carrito.query.filter(Carrito.usuario_id == id_usuario, Carrito.fin_compra == False).first()
+    def buscar_por_usuario(id_usuario, estado_compra):
+        return Carrito.query.filter(Carrito.usuario_id == id_usuario, Carrito.fin_compra == estado_compra).all()
 
 class ProdCarrito(db.Model):
     __tablename__ = 'carrito_prod'
