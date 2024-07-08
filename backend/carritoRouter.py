@@ -43,7 +43,7 @@ def delete_cart(id):
 @carritos.route('/<int:id>/checkout', methods=['POST'])
 def checkout_cart(id):
     data = request.get_json()
-    carrito = Carrito.buscar_por_usuario(data['id_usuario'])
+    carrito = Carrito.buscar_por_usuario(data['id_usuario'], False)
     lista_items = ProdCarrito.buscar_por_carrito(id)
     try:
         for item in lista_items:
