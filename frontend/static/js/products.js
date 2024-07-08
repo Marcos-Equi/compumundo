@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
-                    document.body.innerHTML = `<p>${data.error}</p>`;
+                    window.location.href = '/producto';
                 } else {
                     let products = data.productos
                     printProducts(products);
