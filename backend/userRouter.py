@@ -27,7 +27,8 @@ def change_password(nombre_usuario):
 
 
 @user_router.route('/usuario/<nombre>', methods=['GET'])
-def obtener_usuario(nombre):
+def get_user(nombre):
+
     usuario = IniciarSesion.query.filter_by(nombre=nombre).first()
     if usuario:
         return jsonify({
