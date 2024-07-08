@@ -216,6 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 if (data.error) {
                     console.error('Error al obtener carrito:', data.error);
                     return;

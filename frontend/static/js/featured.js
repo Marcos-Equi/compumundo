@@ -1,5 +1,23 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    var featuredProductsContainer = document.getElementById('featured-products-container');
+    let featuredProductsContainer = document.getElementById('featured-products-container');
+    let carritoId = localStorage.getItem('carrito_id');
+    let carrito = null;
+    if (carritoId) {
+        carrito = await fetch(`/api/carritos/${carritoId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error al obtener carrito:', data.error);
+                    carrito = null;
+                    return;
+                }
+
+                return data.carrito;
+            })
+            .catch(error => {
+                console.error('Error al obtener carrito:', error);
+            })
+    }
 
     await fetch('/api/productos/destacados')
         .then(response => response.json())
@@ -10,22 +28,25 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
 
             data.productos.forEach(producto => {
-                var productDiv = document.createElement('div');
+                let productDiv = document.createElement('div');
                 productDiv.classList.add('featured-product', 'swiper-slide');
-                productDiv.addEventListener('click', function () {
-                    window.location.href = `/producto?id=${producto.id}`;
-                });
 
-                var productImage = document.createElement('img');
+                let productImage = document.createElement('img');
                 productImage.src = producto.imagen;
                 productImage.alt = producto.nombre;
+                productImage.addEventListener('click', function () {
+                    window.location.href = `/producto?id=${producto.id}`;
+                });
                 productDiv.appendChild(productImage);
 
-                var productName = document.createElement('h4');
+                let productName = document.createElement('h4');
                 productName.textContent = producto.nombre;
+                productName.addEventListener('click', function () {
+                    window.location.href = `/producto?id=${producto.id}`;
+                });
                 productDiv.appendChild(productName);
 
-                var productPrice = document.createElement('p');
+                let productPrice = document.createElement('p');
                 let precio = parseFloat(producto.precio).toLocaleString("es-ES", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
@@ -34,12 +55,32 @@ document.addEventListener('DOMContentLoaded', async function () {
                 productPrice.classList.add('precio_prod');
                 productDiv.appendChild(productPrice);
 
-                let addToCartButton = document.createElement('a');
-                addToCartButton.href = '#';
-                addToCartButton.textContent = 'Agregar al carrito';
-                addToCartButton.classList.add('btn', 'btn-primary', 'mt-auto', 'agregar_car');
-                addToCartButton.setAttribute('onclick', `addItemToCart(${producto.id}, 1)`);
-                productDiv.appendChild(addToCartButton);
+                let cardFooter = document.createElement('div');
+                cardFooter.classList.add('card-footer', 'd-flex', 'flex-row');
+                if (producto.stock > 0)
+                    cardFooter.innerHTML = `
+                            <button href="#" class="btn btn-primary mt-auto agregar_car" onclick="addItemToCart(${producto.id}, 1)">Agregar al carrito</button>
+                    `
+                else {
+                    cardFooter.innerHTML = `
+                            <button href="#" class="btn btn-primary mt-auto agregar_car" disabled>Sin stock</button>
+                    `
+                }
+                if (carrito) {
+                    for (const item of carrito.items) {
+                        if (item.producto_id === producto.id) {
+                            cardFooter.innerHTML += `
+                            <a href="#" class="text-reset me-3 position-absolute cart-button" onclick="goToCart()">
+                                <span class="badge bg-primary position-absolute top-0 start-100 translate-middle"
+                                    id="cantidad_carrito">${item.cantidad}</span>
+                                <i class="fas fa-shopping-cart carrito producto"></i>
+                            </a>
+                            `
+                            break;
+                        }
+                    }
+                }
+                productDiv.appendChild(cardFooter);
 
                 featuredProductsContainer.appendChild(productDiv);
             });

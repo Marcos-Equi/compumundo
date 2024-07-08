@@ -93,3 +93,12 @@
 #agregar_car {
     max-width: 200px;
 }
+
+.cart-button-products {
+    bottom: 10%;
+    right: 15%;
+}
+
+.cart-button-products i {
+    font-size: 1.5rem !important;
+}

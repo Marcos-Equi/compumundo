@@ -1,11 +1,46 @@
-function printProducts(products) {
+async function printProducts(products) {
     let container = document.querySelector('.product-container');
     container.innerHTML = '';
+    let carritoId = localStorage.getItem('carrito_id');
+    let carrito = null;
+    if (carritoId) {
+        carrito = await fetch(`/api/carritos/${carritoId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error al obtener carrito:', data.error);
+                    carrito = null;
+                    return;
+                }
+
+                return data.carrito;
+            })
+            .catch(error => {
+                console.error('Error al obtener carrito:', error);
+            })
+    }
     for (const prod of products) {
         let precio = parseFloat(prod.precio).toLocaleString("es-ES", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
+        let btnCarrito = ``;
+        if (carrito) {
+            let cardBody = document.querySelector('.card-body');
+            for (const item of carrito.items) {
+                console.log(item.producto_id, prod.nombre, prod.id);
+                if (item.producto_id === prod.id) {
+                    btnCarrito += `
+                    <a href="#" class="text-reset me-3 position-absolute cart-button-products" onclick="goToCart()">
+                        <span class="badge bg-primary position-absolute top-0 start-100 translate-middle"
+                            id="cantidad_carrito">${item.cantidad}</span>
+                        <i class="fas fa-shopping-cart carrito producto"></i>
+                    </a>
+                `
+                    break;
+                }
+            }
+        }
         const productCard = `
             <div class="col-12 product-card">
                 <div class="card">
@@ -25,6 +60,7 @@ function printProducts(products) {
                 `<button href="#" class="btn btn-primary mt-auto" id="agregar_car" onclick="addItemToCart(${prod.id}, 1)">Agregar al carrito</button>`
                 : `<button href="#" class="btn btn-primary mt-auto" id="agregar_car"  disabled>Sin stock</button>`
             }
+                            ${btnCarrito}
                         </div>
                     </div>
                 </div>
@@ -76,7 +112,7 @@ function filtrarProductos(tipo) {
         .then(data => {
             if (data.error) {
                 let container = document.querySelector('.product-container');
-                container.innerHTML = `<h3>No hay mas productos de ese tipo :(</h3>`;
+                container.innerHTML = `<h3 > No hay mas productos de ese tipo :(</h3> `;
             } else {
                 let products = data.productos
                 printProducts(products);

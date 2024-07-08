@@ -49,9 +49,10 @@
                         <button class="btn btn-outline-light" id="search-button" type="submit">Buscar</button>
                     </form>
                 </div>
-
                 <div class="d-flex align-items-center">
-                    <a href="#" class="text-reset me-3" id="cart-button" onclick="goToCart()">
+                    <a href="#" class="text-reset me-3 position-relative" id="cart-button" onclick="goToCart()">
+                        <span class="badge bg-primary position-absolute top-0 start-100 translate-middle"
+                            id="cantidad_carrito">0</span>
                         <i class="fas fa-shopping-cart carrito"></i>
                     </a>
                     <!-- Avatar/Button -->
@@ -66,44 +67,44 @@
 
         <section class="py-5" id="datos_producto">
             <div class="container">
-                    <div class="row gx-5">
-                        <aside class="col-lg-6">
-                            <div class="border rounded-4 mb-3 d-flex justify-content-center" id="imagen_cont">
+                <div class="row gx-5">
+                    <aside class="col-lg-6">
+                        <div class="border rounded-4 mb-3 d-flex justify-content-center" id="imagen_cont">
+                        </div>
+                    </aside>
+                    <main class="col-lg-6">
+                        <div class="ps-lg-3">
+                            <h4 class="title text-dark" id="nombre_prod">
+                            </h4>
+                            <div class="d-flex flex-row my-3">
+                                <div class="text-warning mb-1 me-2">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span class="ms-1">
+                                        4.5
+                                    </span>
+                                </div>
+                                <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154
+                                    orders</span>
+                                <span class="ms-2" id="aviso_stock"></span>
                             </div>
-                        </aside>
-                        <main class="col-lg-6">
-                            <div class="ps-lg-3">
-                                <h4 class="title text-dark" id="nombre_prod">
-                                </h4>
-                                <div class="d-flex flex-row my-3">
-                                    <div class="text-warning mb-1 me-2">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                        <span class="ms-1">
-                                            4.5
-                                        </span>
-                                    </div>
-                                    <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154
-                                        orders</span>
-                                    <span class="ms-2" id="aviso_stock"></span>
-                                </div>
 
-                                <div class="mb-3">
-                                    <span class="h5" id="precio_prod"></span>
-                                    <span class="text-muted">/unidad</span>
-                                </div>
+                            <div class="mb-3">
+                                <span class="h5" id="precio_prod"></span>
+                                <span class="text-muted">/unidad</span>
+                            </div>
 
-                                <p class="descripcion_prod"></p>
+                            <p class="descripcion_prod"></p>
 
-                                <div class="row">
-                                    <dt class="col-3">Tipo:</dt>
-                                    <dd class="col-9" id="tipo_prod"></dd>
-                                </div>
+                            <div class="row">
+                                <dt class="col-3">Tipo:</dt>
+                                <dd class="col-9" id="tipo_prod"></dd>
+                            </div>
 
-                                <hr />
+                            <hr />
 
                             <div class="row mb-4">
                                 <div class="col-md-4 col-6 mb-3">
