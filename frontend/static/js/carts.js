@@ -20,7 +20,11 @@ function printEmptyCart() {
 };
 
 function printCartItem(container, item) {
-    let itemPrice = (parseFloat(item.info_producto.precio) * item.cantidad).toFixed(2);
+    let itemPrice = (parseFloat(item.info_producto.precio) * item.cantidad);
+    itemPrice = itemPrice.toLocaleString("es-ES", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
     const itemTableRow = `
     <div class="card rounded-3 mb-4 text-bg-light" id="item-${item.producto_id}">
         <div class="card-body p-4">
@@ -87,7 +91,7 @@ function printCartItem(container, item) {
 
 function printAllCartItems(cart) {
     let items = cart.items
-    let container = document.getElementById('cart-items-container');      
+    let container = document.getElementById('cart-items-container');
     for (const item of items) {
         printCartItem(container, item);
     }
@@ -103,7 +107,10 @@ function printCartPrice(totalPrice) {
             </div>
             <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                 <h5 class="mb-0">$ 
-                    <span id="total-price">${totalPrice}</span>
+                    <span id="total-price">${parseFloat(totalPrice).toLocaleString("es-ES", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })}</span>
                 </h5>
             </div>
         </div>
@@ -128,7 +135,10 @@ function printCartCheckout() {
 
 function updateTotalPrice(price) {
     let totalPriceContainer = document.getElementById('total-price');
-    totalPriceContainer.innerText = price;
+    totalPriceContainer.innerText = parseFloat(price).toLocaleString("es-ES", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })
 };
 
 function updateItem(elementID) {
@@ -154,10 +164,13 @@ function updateItem(elementID) {
                 console.error('Error al obtener item:', data.error);
                 return;
             }
-            let itemPrice = (parseFloat(data.item.info_producto.precio) * data.item.cantidad).toFixed(2);
+            let itemPrice = (parseFloat(data.item.info_producto.precio) * data.item.cantidad).toLocaleString("es-ES", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
             itemPriceContainer.innerText = itemPrice;
             updateTotalPrice(data.precio_total);
-            
+
         })
         .catch(error => {
             console.error('Error al obtener item:', error);
@@ -200,14 +213,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if (cartID) {
         fetch(`/api/carritos/${cartID}`, {
             method: "GET"
-        })        
+        })
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
                     console.error('Error al obtener carrito:', data.error);
                     return;
                 }
-                var cart = data.carrito;
+                let cart = data.carrito;
                 if (cart.items.length === 0) {
                     printEmptyCart();
                 } else {

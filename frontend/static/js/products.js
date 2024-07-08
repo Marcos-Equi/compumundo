@@ -21,10 +21,10 @@ function printProducts(products) {
                                 <a href='/producto?id=${prod.id}' class="titulo_prod">${prod.nombre}</a>
                             </div>
                             <span class="precio_prod">$ ${precio}</span>
-                            ${prod.stock > 0 ? 
-                                `<button href="#" class="btn btn-primary mt-auto" id="agregar_car" onclick="addItemToCart(${prod.id}, 1)">Agregar al carrito</button>`
-                                : `<button href="#" class="btn btn-primary mt-auto" id="agregar_car"  disabled>Sin stock</button>`
-                            }
+                            ${prod.stock > 0 ?
+                `<button href="#" class="btn btn-primary mt-auto" id="agregar_car" onclick="addItemToCart(${prod.id}, 1)">Agregar al carrito</button>`
+                : `<button href="#" class="btn btn-primary mt-auto" id="agregar_car"  disabled>Sin stock</button>`
+            }
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (data.error) {
                     document.body.innerHTML = `<p>${data.error}</p>`;
                 } else {
-                    var products = data.productos
+                    let products = data.productos
                     printProducts(products);
                 }
             })
@@ -78,7 +78,7 @@ function filtrarProductos(tipo) {
                 let container = document.querySelector('.product-container');
                 container.innerHTML = `<h3>No hay mas productos de ese tipo :(</h3>`;
             } else {
-                var products = data.productos
+                let products = data.productos
                 printProducts(products);
             }
         })

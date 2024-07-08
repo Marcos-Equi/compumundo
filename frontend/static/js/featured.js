@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 addToCartButton.href = '#';
                 addToCartButton.textContent = 'Agregar al carrito';
                 addToCartButton.classList.add('btn', 'btn-primary', 'mt-auto', 'agregar_car');
+                addToCartButton.setAttribute('onclick', `addItemToCart(${producto.id}, 1)`);
                 productDiv.appendChild(addToCartButton);
 
                 featuredProductsContainer.appendChild(productDiv);

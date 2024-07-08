@@ -1,32 +1,51 @@
 async function addItemToCart(productId, quantity) {
     const userId = localStorage.getItem('usuario_id');
-    const cartId = localStorage.getItem('carrito_id');
+    let cartId = localStorage.getItem('carrito_id');
 
     if (userId) {
-        if (cartId) {
-            let fetchURL = `/api/carritos/${cartId}/producto/${productId}`;
-            console.log(fetchURL);
-            await fetch(`/api/carritos/${cartId}/producto/${productId}`, {
+        if (!cartId) {
+            await fetch(`/api/carritos/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    'cantidad': quantity
+                    'id_usuario': userId
                 }),
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.error) {
-                        console.error('Error al agregar item:', data.error);
+                        console.error('Error al obtener carrito:', data.error);
                         return;
                     }
-                    console.log('Se agrego el item:', data.item_carrito);
+                    localStorage.setItem('carrito_id', data.carrito.id)
+                    cartId = data.carrito.id;
                 })
                 .catch(error => {
-                    console.error('Error al agregar item:', error);
+                    console.error('Error al obtener item:', error);
                 });
         }
+        await fetch(`/api/carritos/${cartId}/producto/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                'cantidad': quantity
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error al agregar item:', data.error);
+                    return;
+                }
+                console.log('Se agrego el item:', data.item_carrito);
+            })
+            .catch(error => {
+                console.error('Error al agregar item:', error);
+            });
         window.location.href = '/carrito';
     } else {
         window.location.href = '/iniciar_sesion';
@@ -36,7 +55,7 @@ async function addItemToCart(productId, quantity) {
 async function goToCart() {
     const userId = localStorage.getItem('usuario_id');
     const cartId = localStorage.getItem('carrito_id');
-    
+
     if (userId) {
         if (!cartId) {
             await fetch(`/api/carritos/`, {
@@ -69,7 +88,7 @@ async function goToCart() {
 async function checkOut() {
     const userId = localStorage.getItem('usuario_id');
     const cartId = localStorage.getItem('carrito_id');
-    
+
     await fetch(`/api/carritos/${cartId}/checkout`, {
         method: 'POST',
         headers: {
