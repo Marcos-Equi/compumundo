@@ -111,6 +111,23 @@ async function checkOut() {
         .catch(error => {
             console.error('Error al obtener item:', error);
         });
-    window.location.href = '/';
-};
+    Swal.fire({
+        title: 'Cargando...',
+        color: 'black',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        allowEnterKey: false,
+        timer: 4000,
+        didClose: () => {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Compra realizada!',
+                color: 'black',
+            }).then(() => {
+                window.location.href = '/';
+            })
+        }
+    });
+    Swal.showLoading();
+}
 
